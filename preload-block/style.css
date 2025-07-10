@@ -1,0 +1,109 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero .title {
+  font-size: 4rem;
+  text-align: center;
+  z-index: 1;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+}
+
+.logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 0.5rem;
+  font-size: 3rem;
+  overflow: hidden;
+  text-align: center;
+}
+
+.word1 {
+  transform: translate(0px, 100px);
+  display: inline-block;
+  will-change: transform;
+}
+
+.word2 {
+  transform: translate(0px, -100px);
+  display: inline-block;
+  will-change: transform;
+}
+
+.overlay-preload {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  color: white;
+}
+
+.overlay-preload .preload-block {
+  width: 100%;
+  height: 100%;
+  background-color: #ff4d07;
+  will-change: clip-path;
+}
+
+.loader-percentage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  color: white;
+  font-size: 3rem;
+  letter-spacing: 0.15rem;
+  overflow: hidden;
+}
+
+.char {
+  transform: translate(0px, 100px);
+  display: inline-block;
+  will-change: transform;
+}
+
+.loader-spinner {
+  position: absolute;
+  bottom: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid #eaeaea;
+  border-top-color: transparent;
+  animation: spin 1s linear infinite;
+  will-change: transform;
+}
+
+@keyframes spin {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
