@@ -6,18 +6,32 @@ const splitTitle = SplitText.create(".title h1", {
   type: "chars,words",
   charsClass: "char",
 });
+const images = gsap.utils.toArray(".image-container");
 
 function playAnimation() {
-  const tl = gsap.timeline();
+  const tl = gsap.timeline({
+    onComplete: () => {
+      let state = Flip.getState(".image-container");
+
+      images.forEach((image) => {
+        image.classList.remove("ordered");
+      });
+
+      Flip.from(state, {
+        absolute: true,
+        duration: 1,
+        ease: "power3.inOut",
+      });
+    },
+  });
 
   tl.to(loaderPercentage, {
     textContent: "100%",
     duration: 4,
     snap: {
-      textContent: 1,
+      textContent: [7, 11, 24, 36, 41, 54, 62, 70, 88, 98, 99, 100],
     },
-    delay: 0.75,
-    ease: "none",
+    delay: 1,
   })
     .to(loaderPercentage, {
       y: -100,
@@ -65,6 +79,9 @@ function playAnimation() {
         from: "random",
       },
       ease: "power3.inOut",
+      onComplete: () => {
+        overlayPreload.style.display = "none";
+      },
     })
     .to(splitTitle.chars, {
       y: 0,
@@ -74,10 +91,19 @@ function playAnimation() {
         each: 0.05,
         from: "start",
       },
+    })
+    .to(".image-container", {
+      clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+      duration: 1,
+      ease: "power3.inOut",
+      stagger: {
+        each: 0.25,
+        from: "start",
+      },
     });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  gsap.registerPlugin(SplitText);
+  gsap.registerPlugin(SplitText, Flip);
   playAnimation();
 });
