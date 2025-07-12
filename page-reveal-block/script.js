@@ -77,6 +77,7 @@ function playAnimation() {
       stagger: {
         each: 0.015,
         from: "random",
+        // grid: [6, 9],
       },
       ease: "power3.inOut",
       onComplete: () => {

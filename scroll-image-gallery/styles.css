@@ -1,0 +1,148 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Neue Montreal", sans-serif;
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.char {
+  transform: translate(0px, 100%);
+  display: inline-block;
+  will-change: transform;
+}
+
+.intro,
+.outro {
+  width: 100%;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  font-size: clamp(1em, 5vw, 3em);
+}
+
+.outro h1,
+.intro h1 {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.gallery {
+  position: relative;
+  width: 100%;
+  height: 700dvh;
+}
+
+.gallery-title {
+  width: 100%;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  text-transform: uppercase;
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.gallery-title h1 {
+  text-align: center;
+}
+
+.card {
+  position: absolute;
+  width: 20%;
+  aspect-ratio: 2 / 3;
+  will-change: transform;
+}
+
+.card:nth-child(1) {
+  top: 7%;
+  right: 10%;
+}
+
+.card:nth-child(2) {
+  top: 18%;
+  left: 10%;
+}
+
+.card:nth-child(3) {
+  top: 30%;
+  right: 10%;
+}
+
+.card:nth-child(4) {
+  top: 43%;
+  left: 10%;
+}
+
+.card:nth-child(5) {
+  top: 55%;
+  right: 10%;
+}
+
+.card:nth-child(6) {
+  top: 70%;
+  left: 10%;
+}
+
+.card:nth-child(7) {
+  top: 83%;
+  right: 10%;
+}
+
+.progress-scroll-container {
+  position: fixed;
+  bottom: 1.5em;
+  right: 2.5em;
+}
+
+.progress-scroll-container .progress-scroll {
+  height: 200px;
+  width: 5px;
+  background-color: #333;
+  border-radius: 10px;
+  transform: scaleY(0);
+  transform-origin: top;
+}
+
+.progress-scroll-container p {
+  margin-top: 0.5em;
+  font-size: 1em;
+  color: #333;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%) rotate(90deg);
+}
+
+@media screen and (max-width: 768px) {
+  .gallery-title {
+    font-size: 1em;
+  }
+  .card {
+    width: 45%;
+    aspect-ratio: 3 / 4;
+  }
+}
