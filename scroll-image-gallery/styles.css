@@ -35,7 +35,7 @@ img {
   align-items: center;
   justify-content: center;
   text-transform: uppercase;
-  font-size: clamp(1em, 5vw, 3em);
+  font-size: clamp(1em, 5vw, 2.5em);
 }
 
 .outro h1,
@@ -98,12 +98,12 @@ img {
 }
 
 .card:nth-child(5) {
-  top: 55%;
+  top: 53%;
   right: 10%;
 }
 
 .card:nth-child(6) {
-  top: 70%;
+  top: 68%;
   left: 10%;
 }
 

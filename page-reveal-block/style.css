@@ -22,7 +22,7 @@ img {
 }
 
 .hero .title {
-  font-size: 4rem;
+  font-size: clamp(1.2rem, 5vw, 4rem);
   text-align: center;
   z-index: 1;
   text-transform: uppercase;
@@ -37,7 +37,7 @@ img {
   transform: translate(-50%, -50%);
   display: flex;
   gap: 0.5rem;
-  font-size: 3rem;
+  font-size: clamp(1.5rem, 5vw, 3rem);
   overflow: hidden;
   text-align: center;
 }
@@ -100,7 +100,8 @@ img {
   top: 50%;
   left: 50%;
   width: 20%;
-  height: 30%;
+  aspect-ratio: 1 / 1;
+  transform: translate(-50%, -50%);
 }
 
 .overlay-preload {
@@ -113,6 +114,7 @@ img {
   inset: 0;
   z-index: 1000;
   color: white;
+  gap: 0;
 }
 
 .overlay-preload .preload-block {
@@ -129,13 +131,13 @@ img {
   transform: translate(-50%, -50%);
   z-index: 100;
   color: white;
-  font-size: 3rem;
+  font-size: clamp(1.5rem, 5vw, 3rem);
   letter-spacing: 0.15rem;
   overflow: hidden;
 }
 
 .char {
-  transform: translate(0px, 100px);
+  transform: translate(0px, 200%);
   display: inline-block;
   will-change: transform;
 }
@@ -160,5 +162,55 @@ img {
   }
   100% {
     transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .image-container:nth-child(2) {
+    width: 30%;
+    aspect-ratio: 3 / 4;
+    top: 20%;
+    left: 30%;
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    will-change: clip-path;
+    transform: translate(-50%, -50%);
+  }
+
+  .image-container:nth-child(3) {
+    width: 30%;
+    aspect-ratio: 4 / 5;
+    top: 30%;
+    right: 5%;
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    will-change: clip-path;
+    transform: translate(0, -50%);
+  }
+
+  .image-container:nth-child(4) {
+    width: 40%;
+    aspect-ratio: 3 / 2;
+    top: 80%;
+    left: 5%;
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    will-change: clip-path;
+    transform: translate(0, -50%);
+  }
+
+  .image-container:last-child {
+    width: 45%;
+    aspect-ratio: 5 / 3;
+    top: 70%;
+    right: 5%;
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    will-change: clip-path;
+    transform: translate(-50%, -50%);
+  }
+
+  .image-container.ordered {
+    top: 50%;
+    left: 50%;
+    width: 40%;
+    aspect-ratio: 1 / 1;
+    transform: translate(-50%, -50%);
   }
 }

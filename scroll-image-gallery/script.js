@@ -28,6 +28,11 @@ document.addEventListener("DOMContentLoaded", function () {
     // normalizeScroll: true,
   });
 
+  smoother.effects(".card", {
+    lag: 0.8,
+    speed: 1,
+  });
+
   // smoother.kill();
 
   ScrollTrigger.create({
@@ -45,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   cards.forEach((card) => {
     gsap.to(card, {
-      yPercent: -200,
+      yPercent: -100,
       ease: "none",
       scrollTrigger: {
         trigger: card,

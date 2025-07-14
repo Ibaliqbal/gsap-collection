@@ -1,0 +1,174 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "PP Neue Montreal", sans-serif;
+  background-color: #f4f3f0;
+  color: #1a1915;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero {
+  position: relative;
+  height: 100svh;
+  width: 100%;
+  overflow: hidden;
+  perspective: 600px;
+}
+
+h1 {
+  font-weight: 500;
+  text-align: center;
+  font-size: 5em;
+  letter-spacing: 0.025em;
+}
+
+.text-intro {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+.text-intro h1 {
+  transform: translate(0, 200px);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.card-img {
+  position: absolute;
+  opacity: 0;
+  will-change: transform, opacity;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  scale: 1.35;
+  cursor: pointer;
+}
+
+.card-img:nth-child(2) {
+  top: 4%;
+  right: 6%;
+  width: 6.1vw;
+}
+
+.card-img:nth-child(3) {
+  top: 28%;
+  right: 7%;
+  width: 13.2vw;
+  margin-bottom: auto;
+  aspect-ratio: 2 / 2;
+}
+
+.card-img:nth-child(4) {
+  bottom: 32%;
+  right: -1.5%;
+  width: 4.7vw;
+}
+
+.card-img:nth-child(5) {
+  bottom: 5.5%;
+  right: 15%;
+  width: 15vw;
+  aspect-ratio: 2 / 1;
+}
+
+.card-img:nth-child(6) {
+  bottom: 1.5%;
+  right: 38%;
+  left: auto;
+  width: 8.3vw;
+  aspect-ratio: 2 / 1;
+}
+
+.card-img:nth-child(7) {
+  bottom: 13.5%;
+  left: 16%;
+  width: 9.5vw;
+  aspect-ratio: 1 / 1;
+}
+
+.card-img:nth-child(8) {
+  bottom: 24%;
+  left: 29%;
+  width: 5.9vw;
+  aspect-ratio: 1 / 1;
+}
+
+.card-img:nth-child(9) {
+  bottom: 46%;
+  left: 7.5%;
+  top: auto;
+  width: 5.2vw;
+  aspect-ratio: 3 / 2;
+}
+
+.card-img:nth-child(10) {
+  top: 21%;
+  left: -8%;
+  width: 13vw;
+  aspect-ratio: 3 / 3;
+}
+
+.card-img:nth-child(11) {
+  top: 15%;
+  left: 29%;
+  width: 9.2vw;
+  aspect-ratio: 3 / 2;
+}
+
+.card-img:nth-child(12) {
+  top: 3%;
+  left: 36%;
+  width: 8.5vw;
+  aspect-ratio: 1 / 1;
+  z-index: -1;
+}
+
+.card-img:nth-child(13) {
+  top: 11%;
+  right: 30%;
+  width: 7.6vw;
+  aspect-ratio: 1 / 1;
+}
+
+.logo {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  overflow: hidden;
+}
+
+.char {
+  transform: translate(0px, 200%);
+  display: inline-block;
+  will-change: transform;
+}
+
+.scroll {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  font-size: 1.2rem;
+  font-family: DM Mono, monospace;
+  text-transform: uppercase;
+}

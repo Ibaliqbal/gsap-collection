@@ -5,6 +5,7 @@ const loaderSpinner = document.querySelector(".loader-spinner");
 const splitTitle = SplitText.create(".title h1", {
   type: "chars,words",
   charsClass: "char",
+  autoSplit: true,
 });
 const images = gsap.utils.toArray(".image-container");
 
@@ -77,7 +78,6 @@ function playAnimation() {
       stagger: {
         each: 0.015,
         from: "random",
-        // grid: [6, 9],
       },
       ease: "power3.inOut",
       onComplete: () => {
