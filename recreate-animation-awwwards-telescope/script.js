@@ -37,7 +37,6 @@ document.addEventListener("DOMContentLoaded", function () {
       "<=0.5"
     )
     .to(images, {
-      // delay: 0.5,
       duration: 1,
       opacity: 1,
       ease: "power1.out",
@@ -48,14 +47,11 @@ document.addEventListener("DOMContentLoaded", function () {
           const hover = img.querySelector(".hover");
           const image = img.querySelector("img");
 
-          console.log(hover, image);
-
           let targetX = 0,
             targetY = 0;
           let currentX = 0,
             currentY = 0;
 
-          // Saat mouse bergerak DI DALAM wrapper
           hover.addEventListener("mousemove", (e) => {
             const rect = hover.getBoundingClientRect();
             const percentX = (e.clientX - rect.left) / rect.width - 0.5;
@@ -65,16 +61,12 @@ document.addEventListener("DOMContentLoaded", function () {
             targetY = percentY * 40;
           });
 
-          // Saat mouse keluar dari wrapper
           hover.addEventListener("mouseleave", () => {
-            // Reset target ke tengah (0,0)
             targetX = 0;
             targetY = 0;
           });
 
-          // Loop animasi
           gsap.ticker.add(() => {
-            // Transisi halus menggunakan LERP
             currentX += (targetX - currentX) * 0.1;
             currentY += (targetY - currentY) * 0.1;
 

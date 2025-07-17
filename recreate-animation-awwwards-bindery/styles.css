@@ -1,0 +1,171 @@
+:root {
+  --primary-background: #e7e789;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+body {
+  font-family: "Courier New", Courier, monospace;
+  background-color: var(--primary-background);
+  color: #000000;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.hover {
+  position: relative;
+  height: 70dvh;
+}
+
+.hover-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.text {
+  font-size: 2rem;
+  padding: 1em 1.5em;
+  display: flex;
+  gap: 0.5rem;
+  height: 30dvh;
+}
+
+.hover-image {
+  width: 15em;
+  aspect-ratio: 3 / 2;
+  position: absolute;
+  z-index: 1;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  cursor: pointer;
+  scale: 1.8;
+  pointer-events: none;
+}
+
+.image-center {
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.image-center p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1em;
+  color: white;
+  text-transform: uppercase;
+  overflow: hidden;
+}
+
+.char {
+  display: inline-block;
+  transform: translateY(100px);
+}
+
+.image-bottom-left {
+  width: 7.6vw;
+  aspect-ratio: 9 / 16;
+  position: absolute;
+  top: 30%;
+  left: -23%;
+  scale: 0.5;
+  will-change: top, left;
+  z-index: -1;
+}
+
+.image-top-left {
+  width: 10.1vw;
+  aspect-ratio: 5 / 3;
+  position: absolute;
+  top: 3%;
+  left: -40%;
+  scale: 0.5;
+  will-change: top, left;
+  z-index: -1;
+}
+
+.image-top-one {
+  width: 10.1vw;
+  aspect-ratio: 5 / 3;
+  position: absolute;
+  top: -40%;
+  left: -5%;
+  scale: 0.5;
+  will-change: top, left;
+  z-index: -2;
+}
+
+.image-top-two {
+  width: 10.1vw;
+  aspect-ratio: 5 / 3;
+  position: absolute;
+  top: -40%;
+  left: 35%;
+  scale: 0.5;
+  will-change: top, left;
+  z-index: -3;
+}
+
+.image-right {
+  width: 7.6vw;
+  aspect-ratio: 9 / 16;
+  position: absolute;
+  top: 0%;
+  left: 70%;
+  scale: 0.5;
+  will-change: top, left;
+  z-index: -4;
+}
+
+.image-bottom {
+  scale: 0.5;
+  width: 7.6vw;
+  aspect-ratio: 9 / 16;
+  position: absolute;
+  top: 45%;
+  left: 23%;
+  will-change: top, left;
+  z-index: -5;
+}
+
+.text .left {
+  font-size: 1.2em;
+  width: 50%;
+}
+
+.text .right {
+  display: flex;
+  gap: 0.5rem;
+  width: 50%;
+}
+.text .right .col {
+  width: 50%;
+  font-size: 0.5em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.text .right .col h2 {
+  text-transform: uppercase;
+}

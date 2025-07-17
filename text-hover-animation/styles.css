@@ -1,0 +1,35 @@
+body {
+  margin: 0;
+  background: #eaeaea;
+  color: #0a0a0a;
+  font-family: sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100dvh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.hover-container {
+  position: relative;
+  font-size: 3rem;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.text {
+  display: inline-block;
+  position: relative;
+}
+
+.text .top,
+.text .bottom {
+  display: block;
+  will-change: transform;
+}
+
+.text .bottom {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
