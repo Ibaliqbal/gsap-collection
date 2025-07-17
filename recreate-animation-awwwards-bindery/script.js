@@ -141,8 +141,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   hoverContainer.addEventListener("pointermove", (e) => {
     gsap.to(hoverImage, {
-      x: e.pageX,
-      y: e.pageY,
+      x: e.pageX + "px",
+      y: e.pageY + "px",
       ease: "power1.out",
       duration: 2,
     });

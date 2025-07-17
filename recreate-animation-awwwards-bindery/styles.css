@@ -48,7 +48,7 @@ body {
 }
 
 .hover-image {
-  width: 25em;
+  width: 20em;
   aspect-ratio: 3 / 2;
   position: absolute;
   z-index: 1;
@@ -82,7 +82,7 @@ body {
 }
 
 .image-bottom-left {
-  width: 13.6vw;
+  width: 10.6vw;
   aspect-ratio: 9 / 16;
   position: absolute;
   top: 30%;
@@ -93,7 +93,7 @@ body {
 }
 
 .image-top-left {
-  width: 17.1vw;
+  width: 14.1vw;
   aspect-ratio: 5 / 3;
   position: absolute;
   top: 3%;
@@ -104,7 +104,7 @@ body {
 }
 
 .image-top-one {
-  width: 17.1vw;
+  width: 14.1vw;
   aspect-ratio: 5 / 3;
   position: absolute;
   top: -40%;
@@ -115,7 +115,7 @@ body {
 }
 
 .image-top-two {
-  width: 17.1vw;
+  width: 14.1vw;
   aspect-ratio: 5 / 3;
   position: absolute;
   top: -40%;
@@ -126,7 +126,7 @@ body {
 }
 
 .image-right {
-  width: 13.6vw;
+  width: 10.6vw;
   aspect-ratio: 9 / 16;
   position: absolute;
   top: 0%;
@@ -138,7 +138,7 @@ body {
 
 .image-bottom {
   scale: 0.5;
-  width: 13.6vw;
+  width: 10.6vw;
   aspect-ratio: 9 / 16;
   position: absolute;
   top: 45%;
