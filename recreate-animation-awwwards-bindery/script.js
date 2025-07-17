@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const tlHoverImageEnter = gsap.timeline({
     paused: true,
-    ease: "power4.inOut",
+    ease: "expo.out",
   });
 
   tlHoverImageEnter
