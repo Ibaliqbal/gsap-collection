@@ -48,7 +48,7 @@ body {
 }
 
 .hover-image {
-  width: 15em;
+  width: 25em;
   aspect-ratio: 3 / 2;
   position: absolute;
   z-index: 1;
@@ -56,7 +56,6 @@ body {
   transform: translate(-50%, -50%);
   will-change: transform;
   cursor: pointer;
-  scale: 1.8;
   pointer-events: none;
 }
 
@@ -83,7 +82,7 @@ body {
 }
 
 .image-bottom-left {
-  width: 7.6vw;
+  width: 13.6vw;
   aspect-ratio: 9 / 16;
   position: absolute;
   top: 30%;
@@ -94,7 +93,7 @@ body {
 }
 
 .image-top-left {
-  width: 10.1vw;
+  width: 17.1vw;
   aspect-ratio: 5 / 3;
   position: absolute;
   top: 3%;
@@ -105,7 +104,7 @@ body {
 }
 
 .image-top-one {
-  width: 10.1vw;
+  width: 17.1vw;
   aspect-ratio: 5 / 3;
   position: absolute;
   top: -40%;
@@ -116,7 +115,7 @@ body {
 }
 
 .image-top-two {
-  width: 10.1vw;
+  width: 17.1vw;
   aspect-ratio: 5 / 3;
   position: absolute;
   top: -40%;
@@ -127,7 +126,7 @@ body {
 }
 
 .image-right {
-  width: 7.6vw;
+  width: 13.6vw;
   aspect-ratio: 9 / 16;
   position: absolute;
   top: 0%;
@@ -139,7 +138,7 @@ body {
 
 .image-bottom {
   scale: 0.5;
-  width: 7.6vw;
+  width: 13.6vw;
   aspect-ratio: 9 / 16;
   position: absolute;
   top: 45%;
