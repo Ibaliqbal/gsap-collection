@@ -1,0 +1,77 @@
+:root {
+  --background-color-menu: #ced1bf;
+  --primary-color: #2b3530;
+  --background-color: #2b3530;
+  --secondary-color: #d1ccbf;
+}
+
+@font-face {
+  font-family: "Basis Grotesque";
+  src: url("/assets/fonts/BasisGrotesqueRegular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--secondary-color);
+  font-family: "Basis Grotesque", sans-serif;
+}
+
+p {
+  font-weight: 300;
+}
+
+.button-directional {
+  position: relative;
+  width: 200px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+  border-top: 1px solid var(--background-color-menu);
+}
+
+.button-directional:last-child {
+  border-bottom: 1px solid var(--background-color-menu);
+}
+
+.button-directional::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--background-color-menu);
+  transform: scaleY(0);
+  transition: transform 0.4s cubic-bezier(0.24, 0.43, 0.15, 0.97);
+  z-index: 0;
+  transform-origin: top;
+}
+
+.button-directional.top::before {
+  transform-origin: bottom;
+}
+
+.button-directional.bottom::before {
+  transform-origin: top;
+}
+
+.button-directional:hover::before {
+  transform: scaleY(1);
+}
+
+.button-directional:hover {
+  color: var(--primary-color);
+}
+
+.button-directional span {
+  position: relative;
+  z-index: 1;
+}

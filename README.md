@@ -6,4 +6,4 @@ Feel free to use and explore the animations available in this project.
 
 ## Credits
 
-Some image assets used in this project are sourced from [Freepik](https://www.freepik.com/) and [Unsplash](https://unsplash.com/).
+Some image assets used in this project are sourced from [Freepik](https://www.freepik.com/) and [Unsplash](https://unsplash.com/). Several font styles are also taken from [DaFont](https://www.dafont.com/).

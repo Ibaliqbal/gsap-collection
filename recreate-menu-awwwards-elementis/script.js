@@ -10,6 +10,42 @@ document.addEventListener("DOMContentLoaded", () => {
   const mediaQuery = window.matchMedia("(min-width: 768px)");
   let isDoneAnimation = false;
 
+  function handleHoverEffect() {
+    if (!mediaQuery.matches) return;
+    hoverLinks.forEach((element) => {
+      element.addEventListener("mouseenter", handleImageFunction);
+    });
+  }
+
+  function handleImageFunction() {
+    const srcImage = this.dataset.image;
+    const newImage = document.createElement("div");
+    newImage.classList.add("image");
+    newImage.style.zIndex = Date.now();
+    const newImg = document.createElement("img");
+    newImg.src = srcImage;
+    newImg.alt = "";
+    newImage.append(newImg);
+    imageCollections.append(newImage);
+
+    if (imageCollections.childElementCount >= 15) {
+      imageCollections.firstElementChild.remove();
+    }
+
+    const tl = gsap.timeline();
+
+    tl.fromTo(
+      newImage,
+      { clipPath: "inset(100% 0 0 0)", scale: 1.3 },
+      {
+        clipPath: "inset(0% 0 0 0)",
+        scale: 1,
+        duration: 0.75,
+        ease: "power2.out",
+      }
+    );
+  }
+
   const tlClose = gsap.timeline({
     paused: true,
   });
@@ -68,14 +104,14 @@ document.addEventListener("DOMContentLoaded", () => {
       .to(".menu", {
         clipPath: "inset(0% 0 0 0)",
         duration: 1,
-        ease: "power2.out",
+        ease: "power2.inOut",
       })
       .to(
         imageWrapper,
         {
           clipPath: "inset(0% 0 0 0)",
           duration: 1,
-          ease: "power2.out",
+          ease: "power2.inOut",
         },
         "<+0.075"
       )
@@ -83,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
         opacity: 0,
         y: 50,
         duration: 0.5,
-        ease: "power2",
+        ease: "power2.inOut",
         stagger: {
           each: "0.05",
         },
@@ -98,14 +134,14 @@ document.addEventListener("DOMContentLoaded", () => {
         .to(imageWrapper, {
           clipPath: "inset(0 0 100% 0)",
           duration: 0.75,
-          ease: "power2.out",
+          ease: "power2.inOut",
         })
         .to(
           menu,
           {
             clipPath: "inset(0 0 100% 0)",
             duration: 0.75,
-            ease: "power2.out",
+            ease: "power2.inOut",
           },
           "<+0.075"
         );
@@ -120,40 +156,11 @@ document.addEventListener("DOMContentLoaded", () => {
     tlClose.reverse();
   });
 
-  if (mediaQuery.matches) {
-    hoverLinks.forEach((element) => {
-      element.addEventListener("mouseenter", () => {
-        const srcImage = element.dataset.image;
+  // jalankan awal
+  handleHoverEffect();
 
-        imageCollections.insertAdjacentHTML(
-          "beforeend",
-          `
-        <div class="image new">
-          <img src="${srcImage}" alt="" />
-        </div>
-      `
-        );
-
-        const newImage = imageCollections.querySelector(".image.new");
-        const allImages = imageCollections.querySelectorAll(".image");
-
-        newImage.style.zIndex = allImages.length;
-
-        const tl = gsap.timeline();
-
-        tl.fromTo(
-          newImage,
-          { clipPath: "inset(100% 0 0 0)", scale: 1.3 },
-          {
-            clipPath: "inset(0% 0 0 0)",
-            scale: 1,
-            duration: 0.75,
-            ease: "power2.out",
-          }
-        );
-
-        newImage.classList.remove("new");
-      });
-    });
-  }
+  // optional: kalau user resize ke atas/bawah 768px
+  mediaQuery.addEventListener("change", (e) => {
+    if (e.matches) handleHoverEffect(); // hanya kalau masuk ke tablet ke atas
+  });
 });
