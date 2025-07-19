@@ -156,11 +156,9 @@ document.addEventListener("DOMContentLoaded", () => {
     tlClose.reverse();
   });
 
-  // jalankan awal
   handleHoverEffect();
 
-  // optional: kalau user resize ke atas/bawah 768px
   mediaQuery.addEventListener("change", (e) => {
-    if (e.matches) handleHoverEffect(); // hanya kalau masuk ke tablet ke atas
+    if (e.matches) handleHoverEffect();
   });
 });
