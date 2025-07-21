@@ -1,3 +1,10 @@
+@font-face {
+  font-family: "Basis Grotesque";
+  src: url("/assets/fonts/BasisGrotesqueRegular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   margin: 0;
   background: #eaeaea;
@@ -7,7 +14,7 @@ body {
   align-items: center;
   justify-content: center;
   height: 100dvh;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  /* font-family: "Basis Grotesque", sans-serif; */
 }
 
 .hover-container {
@@ -15,6 +22,7 @@ body {
   font-size: 3rem;
   overflow: hidden;
   cursor: pointer;
+  text-transform: uppercase;
 }
 
 .text {
