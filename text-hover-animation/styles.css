@@ -14,7 +14,6 @@ body {
   align-items: center;
   justify-content: center;
   height: 100dvh;
-  /* font-family: "Basis Grotesque", sans-serif; */
 }
 
 .hover-container {
@@ -23,6 +22,7 @@ body {
   overflow: hidden;
   cursor: pointer;
   text-transform: uppercase;
+  font-family: "Basis Grotesque", sans-serif;
 }
 
 .text {

@@ -35,7 +35,7 @@ img {
 .parallax-container {
   overflow: hidden;
   background-color: black;
-  height: 200dvh;
+  height: 250dvh;
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(4, 1fr);
@@ -59,4 +59,5 @@ img {
 .card-image {
   width: 100%;
   aspect-ratio: 3 / 4;
+  cursor: pointer;
 }

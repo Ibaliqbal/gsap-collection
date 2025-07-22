@@ -1,0 +1,55 @@
+:root {
+  --primary-background-color: #ced1bf;
+  --primary-color: #2b3530;
+  --secondary-background-color: #2b3530;
+  --secondary-color: #d1ccbf;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+@font-face {
+  font-family: "Basis Grotesque";
+  src: url("/assets/fonts/BasisGrotesqueRegular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-color);
+  font-family: "Basis Grotesque", sans-serif;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.intro,
+.outro {
+  width: 100%;
+  height: 100dvh;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3em;
+  text-transform: uppercase;
+}
+
+.scrolling-wrapper {
+  width: 100%;
+  height: 300dvh;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-color);
+}
