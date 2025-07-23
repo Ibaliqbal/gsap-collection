@@ -53,3 +53,15 @@ img {
   background-color: var(--secondary-background-color);
   color: var(--secondary-color);
 }
+
+.scrollbar {
+  background-color: var(--primary-background-color);
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  will-change: transform;
+}
