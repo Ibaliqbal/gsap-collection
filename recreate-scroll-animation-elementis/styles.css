@@ -1,8 +1,9 @@
 :root {
   --primary-background-color: #ced1bf;
   --primary-color: #2b3530;
-  --secondary-background-color: #2b3530;
   --secondary-color: #d1ccbf;
+  --vw: 1440;
+  --multiplier: 100vw;
 }
 
 ::-webkit-scrollbar {
@@ -23,7 +24,7 @@
 }
 
 body {
-  background-color: var(--secondary-background-color);
+  background-color: var(--primary-color);
   color: var(--secondary-color);
   font-family: "Basis Grotesque", sans-serif;
 }
@@ -38,30 +39,189 @@ img {
 .outro {
   width: 100%;
   height: 100dvh;
-  background-color: var(--secondary-background-color);
+  background-color: var(--primary-color);
   color: var(--secondary-color);
   display: flex;
   justify-content: center;
-  align-items: center;
-  font-size: 3em;
-  text-transform: uppercase;
+  align-items: flex-end;
+  font-size: calc(40 / var(--vw) * var(--multiplier));
+  padding-bottom: 1rem;
+}
+
+.intro h1,
+.outro h1 {
+  max-width: 90vw;
+  text-indent: 5em;
 }
 
 .scrolling-wrapper {
   width: 100%;
-  height: 300dvh;
-  background-color: var(--secondary-background-color);
+  height: 100dvh;
+  max-height: 100dvh;
+  min-height: 800px;
+  background-color: var(--primary-color);
   color: var(--secondary-color);
+  position: relative;
+  overflow: hidden;
 }
 
-.scrollbar {
-  background-color: var(--primary-background-color);
+.bg {
+  position: absolute;
   width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 2px;
-  transform: scaleX(0);
-  transform-origin: left;
+  height: 100%;
+  inset: 0;
+  pointer-events: none;
+}
+
+.bg .bg-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.bg .bg-wrapper .image {
+  position: absolute;
+  inset: 0;
+}
+
+.bg .bg-wrapper .image:not(:first-child) {
+  mask-image: var(--mask-image);
+  -webkit-mask-image: var(--mask-image);
+  clip-path: transform, mask-image;
+  transform: scale(1.1);
+}
+
+.text-floating {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0 calc(64 / var(--vw) * var(--multiplier));
+  width: 100%;
+}
+
+.wrapper-text {
+  display: flex;
+  align-items: center;
+  gap: 1.5em;
+}
+
+ion-icon {
+  font-size: 32px;
+  margin-top: -0.35rem;
+}
+
+.text-label,
+.text-scroll {
+  font-weight: 400;
+  line-height: 1;
+  font-size: calc(20 / var(--vw) * var(--multiplier));
+}
+
+.poster {
+  background-color: var(--primary-background-color);
+  color: var(--primary-color);
+  height: calc(100% - 76 / var(--vw) * var(--multiplier));
+  max-height: calc(688 / var(--vw) * var(--multiplier));
+  width: 100%;
+  max-width: calc(472 / var(--vw) * var(--multiplier));
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  text-align: center;
+  overflow: hidden;
+  padding: calc(32 / var(--vw) * var(--multiplier));
+}
+
+.lines {
+  transform: translateY(150%);
   will-change: transform;
+}
+
+.title:first-child .lines,
+.desc:first-child .lines {
+  transform: translateY(0);
+}
+
+.title-wrapper {
+  height: calc(44 / var(--vw) * var(--multiplier));
+  margin: 15% auto 10%;
+  max-width: calc(272 / var(--vw) * var(--multiplier));
+  position: relative;
+  width: 100%;
+}
+
+.title-wrapper > * {
+  font-size: calc(28 / var(--vw) * var(--multiplier));
+  font-weight: 300;
+  line-height: 0.857;
+}
+
+.title {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.image-wrapper {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: calc(263 / var(--vw) * var(--multiplier));
+}
+
+.image-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+}
+
+.image-wrapper .image-inner .image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.image-wrapper .image-inner .image:not(:first-child) {
+  will-change: clip-path;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  clip-path: var(--mask-clip-path);
+}
+
+.desc-wrapper {
+  height: calc(120 / var(--vw) * var(--multiplier));
+  margin-inline: auto;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: calc(346 / var(--vw) * var(--multiplier));
+  margin-top: 10%;
+}
+
+.desc {
+  font-size: calc(16 / var(--vw) * var(--multiplier));
+  line-height: 1.25;
+  font-weight: 400;
+  width: 100%;
+  inset: 0;
+  position: absolute;
+  text-align: center;
+}
+
+@media (min-aspect-ratio: 16 / 9) and (max-height: 870px) {
+  .poster .image-wrapper {
+    height: 35%;
+  }
 }
