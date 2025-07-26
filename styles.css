@@ -1,0 +1,236 @@
+:root {
+  --vw: 1440;
+  --multiplier: 100vw;
+  --primary-color: #eaeaea;
+  --secondary-color: #131313;
+}
+
+::selection {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* Default style lenis for smooth scroll */
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+.lenis.lenis-autoToggle {
+  transition-property: overflow;
+  transition-duration: 1ms;
+  transition-behavior: allow-discrete;
+}
+
+/* End line of style lenis smooth scroll */
+
+@font-face {
+  font-family: "Neue Montreal";
+  src: url("/assets/fonts/NeueMontrealRegular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+p,
+a {
+  text-decoration: none;
+  color: currentColor;
+}
+
+body {
+  overflow-x: hidden;
+  font-family: "Neue Montreal", sans-serif;
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+}
+
+ion-icon {
+  font-size: 32px;
+}
+
+.lines {
+  transform: translateY(150%);
+  will-change: transform;
+}
+
+.link {
+  position: relative;
+  width: max-content;
+}
+
+.link::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: currentColor;
+  pointer-events: none;
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.24, 0.43, 0.15, 0.97);
+  will-change: transform;
+  width: 100%;
+  height: 2px;
+}
+
+.link:hover::before {
+  transform: scaleX(0);
+  transform-origin: right;
+}
+
+.logo {
+  max-width: 100vw;
+  font-size: 12vw;
+  text-transform: uppercase;
+  line-height: 1;
+  text-align: center;
+  letter-spacing: 0.75vw;
+  font-weight: 400;
+}
+
+.highlight {
+  display: inline-block;
+  will-change: transform;
+}
+
+.char {
+  will-change: transform;
+}
+
+.loader-spinner {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid var(--primary-color);
+  border-top-color: transparent;
+  animation: spin 1s linear infinite;
+  will-change: transform;
+  pointer-events: none;
+}
+
+@keyframes spin {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.logo.active {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3em;
+  font-weight: 400;
+  opacity: 0;
+}
+
+.chars-logo {
+  opacity: 0;
+}
+
+.chars-logo:first-child {
+  transform: translate(-200%, -150%);
+}
+
+.chars-logo:nth-child(2) {
+  transform: translate(-250%, 100%);
+}
+
+.chars-logo:nth-child(3) {
+  transform: translate(-150%, 300%);
+}
+
+.chars-logo:nth-child(4) {
+  transform: translate(-150%, 0%);
+}
+
+.chars-logo:nth-child(5) {
+  transform: translate(-10%, 200%);
+}
+
+.chars-logo:nth-child(6) {
+  transform: translate(-100%, -200%);
+}
+
+.chars-logo:nth-child(7) {
+  transform: translate(150%, -200%);
+}
+
+.chars-logo:nth-child(8) {
+  transform: translate(-100%, 0%);
+}
+
+.chars-logo:nth-child(9) {
+  transform: translate(0%, 300%);
+}
+
+.chars-logo:nth-child(10) {
+  transform: translate(200%, -200%);
+}
+
+.chars-logo:nth-child(11) {
+  transform: translate(-200%, 0%);
+}
+
+.chars-logo:last-child {
+  transform: translate(100%, 300%);
+}
+
+.main-container {
+  padding: 1em 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+  opacity: 0;
+}
+
+.about {
+  width: 100%;
+  display: grid;
+  gap: 2em;
+  grid-template-columns: 1fr 2fr;
+}
+
+.about-title,
+.animations-title {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  text-transform: uppercase;
+  max-height: max-content;
+  opacity: 0;
+  will-change: opacity;
+}
+
+.about-description {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: calc(16 / var(--vw) * var(--multiplier));
+}

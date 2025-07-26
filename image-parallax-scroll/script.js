@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   scrollerImages.forEach((container, index) => {
     const direction = container.dataset.direction;
     gsap.to(container, {
-      yPercent: direction === "bottom" ? -15 + (index + 1) : 15 + (index + 1),
+      yPercent: direction === "bottom" ? -16 + (index + 1) : 16 + (index + 1),
       ease: "power1",
       scrollTrigger: {
         trigger: container,

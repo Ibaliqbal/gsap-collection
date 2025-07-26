@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     effects: true,
     smoothTouch: 0.1,
   });
+  
   smoother.effects(".scrolling-wrapper", {
     speed: 1,
   });
@@ -168,6 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       "-=100%"
     );
+
     timeline.to(
       backgroundImages[index],
       {
@@ -189,9 +191,11 @@ document.addEventListener("DOMContentLoaded", () => {
     ".bg-wrapper .image-0",
     {
       yPercent: -30,
+      transform: "scale(1.1)",
     },
     {
       yPercent: 0,
+      transform: "scale(1)",
       ease: "none",
       scrollTrigger: {
         trigger: ".scrolling-wrapper",
