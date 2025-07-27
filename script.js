@@ -2,75 +2,52 @@ const list_animations = [
   {
     title: "Page Reveal Block",
     href: "/page-reveal-block/",
-    preview: "/assets/images/img 1.jpg",
+    preview: "/assets/images/demo/page-reveal-block.png",
+    baseColor: "baseColorPageRevealBlock",
   },
   {
     title: "Text Hover Animation",
     href: "/text-hover-animation/",
-    preview: "/assets/images/img 2.jpg",
+    preview: "/assets/images/demo/text-hover.png",
+    baseColor: "baseColorTextHoverDestination",
   },
   {
     title: "Scroll Image Gallery",
     href: "/scroll-image-gallery/",
-    preview: "/assets/images/img 3.jpg",
+    preview: "/assets/images/demo/scroll-image-gallery.png",
+    baseColor: "baseColorScrollImageGallery",
   },
   {
     title: "Menu Animation Elementis Awwward",
     href: "/recreate-menu-awwwards-elementis/",
-    preview: "/assets/images/img 5.jpg",
+    preview: "/assets/images/demo/menu-elementis.png",
+    baseColor: "baseColorElementis",
   },
   {
     title: "Page Reveal Telescope Awwward",
     href: "/recreate-animation-awwwards-telescope/",
-    preview: "/assets/images/img 7.jpg",
+    preview: "/assets/images/demo/reveal-telescope.png",
+    baseColor: "baseColorTelescope",
   },
   {
     title: "Hover Animation Bindery Awwward",
     href: "/recreate-animation-awwwards-bindery/",
-    preview: "/assets/images/img 8.jpg",
+    preview: "/assets/images/demo/hover-bindery.png",
+    baseColor: "baseColorBindery",
+  },
+  {
+    title: "Hover Animation Elementis Awwward",
+    href: "/recreate-hover-animation-awwwards-elementis/",
+    preview: "/assets/images/demo/hover-elementis.png",
+    baseColor: "baseColorElementis",
   },
   {
     title: "Scroll Animation Elementis Awwward",
     href: "/recreate-scroll-animation-elementis/",
-    preview: "/assets/images/img 13.jpg",
+    preview: "/assets/images/demo/scroll-elementis.png",
+    baseColor: "baseColorElementis",
   },
 ];
-
-function getSimilarityScore(a, b) {
-  const wordsA = a.toLowerCase().split(/\s+/);
-  const wordsB = b
-    .toLowerCase()
-    .split(/(?=[A-Z])/)
-    .join(" ")
-    .split(/\s+/);
-
-  let score = 0;
-
-  for (const wordA of wordsA) {
-    for (const wordB of wordsB) {
-      if (wordB.includes(wordA) || wordA.includes(wordB)) {
-        score++;
-      }
-    }
-  }
-
-  return score;
-}
-
-function findClosestKey(input, variableObj) {
-  let maxScore = 0;
-  let bestMatch = null;
-
-  for (const key of Object.keys(variableObj)) {
-    const score = getSimilarityScore(input, key);
-    if (score > maxScore) {
-      maxScore = score;
-      bestMatch = key;
-    }
-  }
-
-  return bestMatch;
-}
 
 async function loadFont(target, config) {
   await document.fonts.ready;
@@ -202,6 +179,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     baseColorPageRevealBlock: rootStyle.getPropertyValue(
       "--base-page-reveal-color"
     ), // #ff4d07
+    baseColorTelescope: rootStyle.getPropertyValue("--base-telescope-color"), // #f4f3f0
   };
 
   gsap.registerPlugin(ScrollTrigger, SplitText, Flip, CustomBounce, CustomEase);
@@ -303,12 +281,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     element.addEventListener("click", function () {
       if (element.classList.contains("not-done")) return;
       const destination = this.dataset.navigation;
-      const closesKey = findClosestKey(
-        originalTitle.textContent,
-        rootVariableCss
-      );
-      console.log(closesKey);
-      console.log(destination);
+      const baseColor =
+        rootVariableCss[
+          list_animations.find((anim) => anim.href === destination).baseColor
+        ];
+      navigationTo(destination, baseColor);
     });
   });
 
