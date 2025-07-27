@@ -3,6 +3,11 @@
   --multiplier: 100vw;
   --primary-color: #eaeaea;
   --secondary-color: #131313;
+  --base-elementis-color: #2b3530;
+  --base-text-hover-color: #eaeaea;
+  --base-scroll-image-gallery-color: #f0f0f0;
+  --base-bindery-color: #e7e789;
+  --base-page-reveal-color: #ff4d07;
 }
 
 ::selection {
@@ -10,10 +15,25 @@
   color: var(--primary-color);
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+}
+
+li,
+ol {
+  list-style: none;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* Default style lenis for smooth scroll */
@@ -61,6 +81,7 @@ body {
   font-family: "Neue Montreal", sans-serif;
   background-color: var(--secondary-color);
   color: var(--primary-color);
+  will-change: background-color, color;
 }
 
 ion-icon {
@@ -112,12 +133,23 @@ ion-icon {
   will-change: transform;
 }
 
+.highlight {
+  -webkit-text-fill-color: var(--text-fill, --secondary-color);
+  -webkit-text-stroke: var(--stroke-size, 0px)
+    var(--text-stroke-color, --primary-color);
+}
+
+.highlight-char {
+  -webkit-text-fill-color: var(--primary-color);
+  -webkit-text-stroke: 0.15px var(--secondary-color);
+}
+
 .char {
   will-change: transform;
 }
 
 .loader-spinner {
-  position: absolute;
+  position: fixed;
   bottom: 5%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -129,6 +161,7 @@ ion-icon {
   animation: spin 1s linear infinite;
   will-change: transform;
   pointer-events: none;
+  /* display: none; */
 }
 
 @keyframes spin {
@@ -141,7 +174,7 @@ ion-icon {
 }
 
 .logo.active {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -208,6 +241,9 @@ ion-icon {
   flex-direction: column;
   gap: 3em;
   opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  margin-block: 2.5em;
 }
 
 .about {
@@ -226,11 +262,149 @@ ion-icon {
   max-height: max-content;
   opacity: 0;
   will-change: opacity;
+  font-size: calc(20 / var(--vw) * var(--multiplier));
 }
 
 .about-description {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  font-size: calc(16 / var(--vw) * var(--multiplier));
+  font-size: calc(18 / var(--vw) * var(--multiplier));
+}
+
+.animations {
+  position: relative;
+}
+
+.animations-title {
+  justify-self: flex-end;
+}
+
+.list-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin-top: 2.5em;
+  display: none;
+  will-change: display;
+}
+
+.list-animations {
+  display: flex;
+  flex-direction: column;
+}
+
+.animation {
+  position: relative;
+  padding: 1.5em 1em;
+  cursor: pointer;
+}
+
+.animation-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  font-size: calc(20 / var(--vw) * var(--multiplier));
+  opacity: 0;
+  will-change: opacity;
+  z-index: 1;
+}
+
+.animation .number,
+.animation .icon {
+  transition: transform 0.4s ease-out;
+}
+
+.animation:hover .number {
+  transform: translateX(100%);
+}
+
+.animation:hover .icon {
+  transform: translateX(-100%);
+}
+
+.animation::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background-color: var(--secondary-color);
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.animation:not(.not-done):hover::before {
+  transform: scaleY(1);
+}
+
+.animation:not(.not-done):hover {
+  color: var(--primary-color);
+}
+
+.animation:not(.not-done):hover .highlight-char {
+  -webkit-text-fill-color: var(--secondary-color);
+  -webkit-text-stroke-color: var(--primary-color);
+}
+
+.animation.top::before {
+  transform-origin: bottom;
+}
+
+.animation.bottom::before {
+  transform-origin: top;
+}
+
+.divider {
+  position: absolute;
+  height: 2px;
+  background-color: var(--secondary-color);
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  will-change: transform;
+}
+
+.wrapper-title {
+  position: relative;
+}
+
+.wrapper-title .title:not(:first-child) {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+}
+
+.wrapper-title .title:first-child .chars-title {
+  transform: translateY(0%);
+}
+
+.chars-title {
+  transform: translateY(150%);
+  will-change: transform;
+}
+
+.preview-animation {
+  position: fixed;
+  width: 17vw;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  z-index: 10;
+  pointer-events: none;
+  right: 6em;
+  bottom: 2em;
+  will-change: clip-path;
+}
+
+.card-preview {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  will-change: clip-path;
 }

@@ -3,6 +3,13 @@
   --width-hover: 20em;
 }
 
+@font-face {
+  font-family: "Neue Montreal";
+  src: url("/assets/fonts/NeueMontrealRegular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -16,7 +23,7 @@ img {
 }
 
 body {
-  font-family: "Courier New", Courier, monospace;
+  font-family: "Neue Montreal", sans-serif;
   background-color: var(--primary-background);
   color: #000000;
 }

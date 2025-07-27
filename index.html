@@ -12,6 +12,10 @@
     <!-- <meta name="description" content=""> -->
     <meta name="og:title" content="GSAP Collection" />
     <link rel="stylesheet" href="styles.css" />
+    <!-- <link
+      rel="stylesheet"
+      href="https://unpkg.com/lenis@1.3.8/dist/lenis.css"
+    /> -->
   </head>
   <body>
     <h1 class="logo active">creati<span class="highlight">v</span>e club</h1>
@@ -19,14 +23,26 @@
       <section class="about">
         <div class="about-title">
           <ion-icon name="code-slash-outline"></ion-icon>
-          <h2>information</h2>
+          <h2>
+            inf<span class="highlight-char">o</span>rmati<span
+              class="highlight-char"
+              >o</span
+            >n
+          </h2>
         </div>
         <div class="about-description">
           <p class="desc">
             Creative Club is an open-source project designed to explore and
-            showcase modern, interactive animations using the GSAP (GreenSock
-            Animation Platform) library. This initiative was born out of a
-            personal desire to sharpen and expand my animation development
+            showcase modern, interactive animations using the
+            <a
+              href="https://gsap.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="link"
+              >GSAP</a
+            >
+            (GreenSock Animation Platform) library. This initiative was born out
+            of a personal desire to sharpen and expand my animation development
             skills by creating visually engaging and dynamic web experiences.
             With a focus on clean design, smooth transitions, and immersive user
             interactions, Creative Club serves as both a creative outlet and a
@@ -83,17 +99,23 @@
       <section class="animations">
         <div class="animations-title">
           <ion-icon name="telescope-outline"></ion-icon>
-          <h2>animations</h2>
+          <h2>animati<span class="highlight-char">o</span>ns</h2>
+        </div>
+        <div class="list-wrapper">
+          <ul class="list-animations"></ul>
+          <div class="preview-animation"></div>
         </div>
       </section>
     </main>
     <div class="loader-spinner"></div>
+
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Flip.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/CustomBounce.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/CustomEase.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.3.8/dist/lenis.min.js"></script>
     <script
       type="module"
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"

@@ -43,8 +43,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     currentIndexImage = indexImage;
 
-    button.classList.remove("top", "bottom");
-    button.classList.add(fromTop ? "bottom" : "top");
+    this.classList.remove("top", "bottom");
+    this.classList.add(fromTop ? "bottom" : "top");
   }
 
   function handleResponsive() {
