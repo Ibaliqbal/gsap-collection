@@ -303,6 +303,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   });
 
+  // document.addEventListener("mousemove", (e) => {
+  //   const rect = listWrapper.getBoundingClientRect();
+  //   const offsetY = e.clientY - rect.top - rect.height;
+  //   gsap.to(".base-cursor", {
+  //     x: e.pageX,
+  //     y: offsetY,
+  //     duration: 2,
+  //     ease: "power2.out",
+  //   });
+  // });
+
   const splitTitle = await loadFont(".logo", {
     type: "chars",
     charsClass: "chars-logo",
@@ -315,6 +326,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   const splitSecondDesc = await loadFont(".desc:nth-child(2)", {
+    type: "lines",
+    mask: "lines",
+    linesClass: "lines",
+  });
+
+  const splitThirdDesc = await loadFont(".desc:nth-child(3)", {
     type: "lines",
     mask: "lines",
     linesClass: "lines",
@@ -398,8 +415,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     duration: 2,
     ease: "highlightBounce",
     onComplete: () => {
-      gsap.to(".list-wrapper", {
-        display: "block",
+      gsap.to(listWrapper, {
+        opacity: 1,
+        visibility: "visible",
+        pointerEvents: "auto",
         ease: "power3.out",
         duration: 0.5,
       });
@@ -418,6 +437,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   timeline.to(
     splitSecondDesc.lines,
+    {
+      y: 0,
+      ease: "expo.out",
+      stagger: 0.15,
+    },
+    "<"
+  );
+
+  timeline.to(
+    splitThirdDesc.lines,
     {
       y: 0,
       ease: "expo.out",
