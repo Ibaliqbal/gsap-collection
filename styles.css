@@ -80,8 +80,8 @@ a {
 body {
   overflow-x: hidden;
   font-family: "Neue Montreal", sans-serif;
-  background-color: var(--secondary-color);
-  color: var(--primary-color);
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
   will-change: background-color, color;
 }
 
@@ -127,6 +127,7 @@ ion-icon {
   text-align: center;
   letter-spacing: 0.75vw;
   font-weight: 400;
+  display: none;
 }
 
 .highlight {
@@ -173,7 +174,37 @@ ion-icon {
   }
 }
 
-/* .base-cursor {
+.preloader {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  inset: 0;
+  z-index: 9;
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+}
+
+.preload-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(1rem, 3vw, 3em);
+  font-weight: 400;
+  text-align: center;
+  text-transform: uppercase;
+  opacity: 0;
+}
+
+.preload-logo.active {
+  visibility: hidden;
+}
+.preload-logo,
+.preload-logo.flipping {
+  visibility: visible;
+}
+
+.base-cursor {
   width: 4rem;
   height: 2rem;
   background-color: #2b3530;
@@ -182,20 +213,17 @@ ion-icon {
   left: 0;
   border-radius: 20%;
   transform: translate(-50%, -50%);
-} */
+  z-index: 0;
+}
 
 .logo.active {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: clamp(1rem, 3vw, 3em);
-  font-weight: 400;
-  opacity: 0;
+  display: block;
+  z-index: 10;
 }
 
 .chars-logo {
   opacity: 0;
+  will-change: opacity, transform;
 }
 
 .chars-logo:first-child {
@@ -251,11 +279,8 @@ ion-icon {
   display: flex;
   flex-direction: column;
   gap: 3em;
-  opacity: 0;
-  visibility: hidden;
   pointer-events: none;
   margin-block: 2.5em;
-  will-change: opacity, visibility, pointer-events;
 }
 
 .about {
@@ -297,10 +322,8 @@ ion-icon {
   width: 100%;
   height: 100%;
   margin-top: 2.5em;
-  opacity: 0;
-  visibility: hidden;
   pointer-events: none;
-  will-change: opacity, visibility, pointer-events;
+  will-change: pointer-events;
 }
 
 .list-animations {
@@ -429,7 +452,7 @@ ion-icon {
   }
 
   .logo {
-    margin-block: 1rem;
+    margin: 1rem 0.5rem;
   }
 
   .loader-spinner {

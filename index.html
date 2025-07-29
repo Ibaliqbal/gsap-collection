@@ -13,7 +13,9 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1 class="logo active">creati<span class="highlight">v</span>e club</h1>
+    <h1 class="logo" data-flip-id="logo">
+      creati<span class="highlight">v</span>e club
+    </h1>
     <main class="main-container">
       <section class="about">
         <div class="about-title">
@@ -126,8 +128,11 @@
         </div>
       </section>
     </main>
-    <div class="loader-spinner"></div>
     <!-- <div class="base-cursor"></div> -->
+    <div class="preloader">
+      <h1 class="preload-logo" data-flip-id="logo">creative club</h1>
+      <div class="loader-spinner"></div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Flip.min.js"></script>

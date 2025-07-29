@@ -227,7 +227,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       paused: true,
       defaults: {
         ease: "hoverEase",
-        duration: 0.5,
+        duration: 0.25,
       },
     });
 
@@ -304,17 +304,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   // document.addEventListener("mousemove", (e) => {
-  //   const rect = listWrapper.getBoundingClientRect();
-  //   const offsetY = e.clientY - rect.top - rect.height;
   //   gsap.to(".base-cursor", {
-  //     x: e.pageX,
-  //     y: offsetY,
-  //     duration: 2,
+  //     x: e.clientX,
+  //     y: e.clientY,
+  //     duration: 0.5,
   //     ease: "power2.out",
   //   });
   // });
 
-  const splitTitle = await loadFont(".logo", {
+  const splitPreloadLogo = await loadFont(".preload-logo", {
     type: "chars",
     charsClass: "chars-logo",
   });
@@ -344,7 +342,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     },
   });
 
-  timeline.to(splitTitle.chars, {
+  timeline.to(splitPreloadLogo.chars, {
     delay: 1.5,
     opacity: 1,
     ease: "power1.out",
@@ -352,14 +350,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       each: 0.1,
     },
     onStart: () => {
-      gsap.to(".logo.active", {
+      gsap.to(".preload-logo", {
         opacity: 1,
         duration: 0.1,
       });
     },
   });
 
-  timeline.to(splitTitle.chars, {
+  timeline.to(splitPreloadLogo.chars, {
     y: 0,
     x: 0,
     ease: "power4.out",
@@ -373,30 +371,25 @@ document.addEventListener("DOMContentLoaded", async () => {
     ease: "power2.out",
   });
 
-  timeline.to("body", {
+  timeline.to(".preloader", {
     backgroundColor: rootVariableCss.primaryColor,
     color: rootVariableCss.secondaryColor,
     ease: "power2.out",
     onComplete: () => {
-      const state = Flip.getState(".logo");
+      const state = Flip.getState(".logo, .preload-logo");
 
-      document.querySelector(".logo").classList.remove("active");
+      document.querySelector(".logo").classList.add("active");
+      document.querySelector(".preload-logo").classList.add("active");
 
       Flip.from(state, {
         duration: 3,
         absolute: true,
         ease: "expo.inOut",
+        toggleClass: "flipping",
         scale: true,
       });
 
-      document.querySelector(".loader-spinner").style.display = "none";
-      gsap.to(container, {
-        opacity: 1,
-        visibility: "visible",
-        pointerEvents: "auto",
-        ease: "power3.out",
-        duration: 0.5,
-      });
+      document.querySelector(".preloader").remove();
     },
   });
 
@@ -416,8 +409,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     ease: "highlightBounce",
     onComplete: () => {
       gsap.to(listWrapper, {
-        opacity: 1,
-        visibility: "visible",
+        pointerEvents: "auto",
+        ease: "power3.out",
+        duration: 0.5,
+      });
+      gsap.to(container, {
         pointerEvents: "auto",
         ease: "power3.out",
         duration: 0.5,
