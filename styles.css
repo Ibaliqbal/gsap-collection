@@ -9,6 +9,7 @@
   --base-bindery-color: #e7e789;
   --base-page-reveal-color: #ff4d07;
   --base-telescope-color: #f4f3f0;
+  --base-vooban-color: #1458e4;
 }
 
 ::selection {
@@ -452,11 +453,13 @@ ion-icon {
   }
 
   .logo {
-    margin: 1rem 0.5rem;
+    margin: 1rem 0;
   }
 
   .loader-spinner {
     bottom: 2%;
+    width: 25px;
+    height: 25px;
   }
 
   .chars-logo:first-child {

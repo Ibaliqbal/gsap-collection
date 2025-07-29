@@ -1,51 +1,57 @@
 const list_animations = [
   {
     title: "Page Reveal Block",
-    href: "/page-reveal-block/",
+    href: "/page-reveal-block/index.html",
     preview: "/assets/images/demo/page-reveal-block.png",
     baseColor: "baseColorPageRevealBlock",
   },
   {
     title: "Text Hover Animation",
-    href: "/text-hover-animation/",
+    href: "/text-hover-animation/index.html",
     preview: "/assets/images/demo/text-hover.png",
     baseColor: "baseColorTextHoverDestination",
   },
   {
     title: "Scroll Image Gallery",
-    href: "/scroll-image-gallery/",
+    href: "/scroll-image-gallery/index.html",
     preview: "/assets/images/demo/scroll-image-gallery.png",
     baseColor: "baseColorScrollImageGallery",
   },
   {
     title: "Menu Animation Elementis Awwward",
-    href: "/recreate-menu-awwwards-elementis/",
+    href: "/recreate-menu-awwwards-elementis/index.html",
     preview: "/assets/images/demo/menu-elementis.png",
     baseColor: "baseColorElementis",
   },
   {
     title: "Page Reveal Telescope Awwward",
-    href: "/recreate-animation-awwwards-telescope/",
+    href: "/recreate-animation-awwwards-telescope/index.html",
     preview: "/assets/images/demo/reveal-telescope.png",
     baseColor: "baseColorTelescope",
   },
   {
     title: "Hover Animation Bindery Awwward",
-    href: "/recreate-animation-awwwards-bindery/",
+    href: "/recreate-animation-awwwards-bindery/index.html",
     preview: "/assets/images/demo/hover-bindery.png",
     baseColor: "baseColorBindery",
   },
   {
     title: "Hover Animation Elementis Awwward",
-    href: "/recreate-hover-animation-awwwards-elementis/",
+    href: "/recreate-hover-animation-awwwards-elementis/index.html",
     preview: "/assets/images/demo/hover-elementis.png",
     baseColor: "baseColorElementis",
   },
   {
     title: "Scroll Animation Elementis Awwward",
-    href: "/recreate-scroll-animation-elementis/",
+    href: "/recreate-scroll-animation-elementis/index.html",
     preview: "/assets/images/demo/scroll-elementis.png",
     baseColor: "baseColorElementis",
+  },
+  {
+    title: "Scroll Animation Vooban Awwward",
+    href: "/recreate-animation-awwward-vooban/index.html",
+    preview: "/assets/images/demo/scroll-vooban.png",
+    baseColor: "baseColorVooban",
   },
 ];
 
@@ -180,6 +186,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       "--base-page-reveal-color"
     ), // #ff4d07
     baseColorTelescope: rootStyle.getPropertyValue("--base-telescope-color"), // #f4f3f0
+    baseColorVooban: rootStyle.getPropertyValue("--base-vooban-color"), // #1458e4
   };
 
   gsap.registerPlugin(ScrollTrigger, SplitText, Flip, CustomBounce, CustomEase);
