@@ -15,6 +15,7 @@
 ::selection {
   background-color: var(--secondary-color);
   color: var(--primary-color);
+  text-decoration: var(--primary-color);
 }
 
 ::-webkit-scrollbar {
@@ -98,6 +99,7 @@ ion-icon {
 .link {
   position: relative;
   width: max-content;
+  color: var(--base-vooban-color);
 }
 
 .link::before {
@@ -295,7 +297,7 @@ ion-icon {
 .animations-title {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 3rem;
   text-transform: uppercase;
   max-height: max-content;
   opacity: 0;
@@ -395,8 +397,8 @@ ion-icon {
 
 .preview-animation {
   position: fixed;
-  width: 17vw;
-  aspect-ratio: 3 / 2;
+  width: 20vw;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   z-index: 10;
   pointer-events: none;
