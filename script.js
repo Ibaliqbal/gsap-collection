@@ -169,7 +169,22 @@ function navigationTo(href, baseColorDestination) {
     });
 }
 
+function handelResponsiveMobileFunction(mediaQuery, callback) {
+  if (mediaQuery.mathces) return;
+  callback();
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
+  gsap.registerPlugin(ScrollTrigger, SplitText, Flip, CustomBounce, CustomEase);
+  CustomBounce.create("highlightBounce", {
+    strength: 0.8,
+    squash: 3,
+  });
+  CustomEase.create("hoverEase", "0.65, 0.05, 0, 1");
+  const lenis = new Lenis();
+
+  initLenis(lenis);
+
   const rootStyle = getComputedStyle(document.documentElement);
   const rootVariableCss = {
     primaryColor: rootStyle.getPropertyValue("--primary-color"), // #eaeaea
@@ -189,22 +204,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     baseColorVooban: rootStyle.getPropertyValue("--base-vooban-color"), // #1458e4
   };
 
-  gsap.registerPlugin(ScrollTrigger, SplitText, Flip, CustomBounce, CustomEase);
-  CustomBounce.create("highlightBounce", {
-    strength: 0.8,
-    squash: 3,
-  });
-  CustomEase.create("hoverEase", "0.65, 0.05, 0, 1");
-
-  const lenis = new Lenis();
-
-  initLenis(lenis);
-
   const container = document.querySelector(".main-container");
   const listAnimationContainer = document.querySelector(".list-animations");
   const previewContainer = document.querySelector(".preview-animation");
   const listWrapper = document.querySelector(".list-wrapper");
   let lastIndexHoverListAnimation = 0;
+  const mediaQuery = window.matchMedia("(min-width: 768px)");
 
   renderListAnimations(listAnimationContainer, list_animations);
 
@@ -256,33 +261,39 @@ document.addEventListener("DOMContentLoaded", async () => {
         "<"
       );
 
-    element.addEventListener("pointerenter", (e) => {
+    element.addEventListener("mouseenter", (e) => {
       if (element.classList.contains("not-done")) return;
-      const rect = element.getBoundingClientRect();
-      const fromTop = e.clientY < rect.top + rect.height / 2;
       timeline.play();
-      showPreview(
-        previewContainer,
-        element.dataset.preview,
-        originalTitle.textContent,
-        index + 1 > lastIndexHoverListAnimation
-      );
 
-      removeExtraImage(previewContainer);
+      handelResponsiveMobileFunction(mediaQuery, () => {
+        showPreview(
+          previewContainer,
+          element.dataset.preview,
+          originalTitle.textContent,
+          index + 1 > lastIndexHoverListAnimation
+        );
 
-      element.classList.remove("top", "bottom");
-      element.classList.add(fromTop ? "bottom" : "top");
-      lastIndexHoverListAnimation = index + 1;
+        removeExtraImage(previewContainer);
+
+        lastIndexHoverListAnimation = index + 1;
+
+        const rect = element.getBoundingClientRect();
+        const fromTop = e.clientY < rect.top + rect.height / 2;
+        element.classList.remove("top", "bottom");
+        element.classList.add(fromTop ? "bottom" : "top");
+      });
     });
 
-    element.addEventListener("pointerleave", (e) => {
+    element.addEventListener("mouseleave", (e) => {
       if (element.classList.contains("not-done")) return;
       timeline.reverse();
-      const rect = element.getBoundingClientRect();
-      const toTop = e.clientY < rect.top + rect.height / 2;
+      handelResponsiveMobileFunction(mediaQuery, () => {
+        const rect = element.getBoundingClientRect();
+        const toTop = e.clientY < rect.top + rect.height / 2;
 
-      element.classList.remove("top", "bottom");
-      element.classList.add(toTop ? "bottom" : "top");
+        element.classList.remove("top", "bottom");
+        element.classList.add(toTop ? "bottom" : "top");
+      });
     });
 
     element.addEventListener("click", function () {
@@ -296,17 +307,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   });
 
-  listWrapper.addEventListener("pointerleave", () => {
-    const lastPreview = previewContainer.querySelector(
-      ".card-preview:last-child"
-    );
+  handelResponsiveMobileFunction(mediaQuery, () => {
+    listWrapper.addEventListener("pointerleave", () => {
+      const lastPreview = previewContainer.querySelector(
+        ".card-preview:last-child"
+      );
 
-    if (!lastPreview) return;
+      if (!lastPreview) return;
 
-    gsap.to(previewContainer.querySelectorAll(".card-preview"), {
-      clipPath: "inset(100% 0 0 0)",
-      duration: 1,
-      ease: "power2.out",
+      gsap.to(previewContainer.querySelectorAll(".card-preview"), {
+        clipPath: "inset(100% 0 0 0)",
+        duration: 1,
+        ease: "power2.out",
+      });
     });
   });
 
@@ -405,7 +418,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     {
       "--text-fill": rootVariableCss.primaryColor,
       "--text-stroke-color": rootVariableCss.secondaryColor,
-      "--stroke-size": "2px",
+      "--stroke-size": !mediaQuery.matches ? "1px" : "2px",
     },
     "+=3"
   );

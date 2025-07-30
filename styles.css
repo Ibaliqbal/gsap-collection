@@ -362,40 +362,6 @@ ion-icon {
   transform: translateX(-100%);
 }
 
-.animation::before {
-  position: absolute;
-  inset: 0;
-  content: "";
-  background-color: var(--secondary-color);
-  z-index: 0;
-  width: 100%;
-  height: 100%;
-  transform: scaleY(0);
-  transform-origin: top;
-  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-}
-
-.animation:not(.not-done):hover::before {
-  transform: scaleY(1);
-}
-
-.animation:not(.not-done):hover {
-  color: var(--primary-color);
-}
-
-.animation:not(.not-done):hover .highlight-char {
-  -webkit-text-fill-color: var(--secondary-color);
-  -webkit-text-stroke-color: var(--primary-color);
-}
-
-.animation.top::before {
-  transform-origin: bottom;
-}
-
-.animation.bottom::before {
-  transform-origin: top;
-}
-
 .divider {
   position: absolute;
   height: 2px;
@@ -511,7 +477,8 @@ ion-icon {
   }
   .main-container {
     padding: 0.5rem 1rem;
-    margin-block: 1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 2.5rem;
   }
 
   .about {
@@ -539,5 +506,41 @@ ion-icon {
     width: 35vw;
     right: 2em;
     bottom: 0.5em;
+  }
+}
+
+@media (min-width: 1024px) {
+  .animation::before {
+    position: absolute;
+    inset: 0;
+    content: "";
+    background-color: var(--secondary-color);
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  .animation:not(.not-done):hover::before {
+    transform: scaleY(1);
+  }
+
+  .animation:not(.not-done):hover {
+    color: var(--primary-color);
+  }
+
+  .animation:not(.not-done):hover .highlight-char {
+    -webkit-text-fill-color: var(--secondary-color);
+    -webkit-text-stroke-color: var(--primary-color);
+  }
+
+  .animation.top::before {
+    transform-origin: bottom;
+  }
+
+  .animation.bottom::before {
+    transform-origin: top;
   }
 }
