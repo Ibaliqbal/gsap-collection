@@ -341,18 +341,21 @@ document.addEventListener("DOMContentLoaded", async () => {
     type: "lines",
     mask: "lines",
     linesClass: "lines",
+    aria: "hidden",
   });
 
   const splitSecondDesc = await loadFont(".desc:nth-child(2)", {
     type: "lines",
     mask: "lines",
     linesClass: "lines",
+    aria: "hidden",
   });
 
   const splitThirdDesc = await loadFont(".desc:nth-child(3)", {
     type: "lines",
     mask: "lines",
     linesClass: "lines",
+    aria: "hidden",
   });
 
   const timeline = gsap.timeline({
