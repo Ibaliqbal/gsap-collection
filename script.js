@@ -53,6 +53,12 @@ const list_animations = [
     preview: "/assets/images/demo/scroll-vooban.png",
     baseColor: "baseColorVooban",
   },
+  {
+    title: "Scroll Animation TUX",
+    href: "/split-vignette/index.html",
+    preview: "/assets/images/demo/split-vignette.png",
+    baseColor: "primaryColor",
+  },
 ];
 
 async function loadFont(target, config) {
@@ -157,7 +163,7 @@ function navigationTo(href, baseColorDestination) {
     },
   });
   timeline
-    .to(".main-container", {
+    .to("body", {
       opacity: 0,
     })
     .to(".logo", {
@@ -181,6 +187,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     squash: 3,
   });
   CustomEase.create("hoverEase", "0.65, 0.05, 0, 1");
+  CustomEase.create("easeInOutQuart", ".645, .045, .355, 1");
   const lenis = new Lenis();
 
   initLenis(lenis);
@@ -227,39 +234,35 @@ document.addEventListener("DOMContentLoaded", async () => {
       type: "chars",
       mask: "chars",
       charsClass: "chars-title",
+      aria: "hidden",
     });
 
     const splitSecondTitle = await loadFont(cloneTitle, {
       type: "chars",
       mask: "chars",
       charsClass: "chars-title",
+      aria: "hidden",
     });
 
     const timeline = gsap.timeline({
       paused: true,
       defaults: {
         ease: "hoverEase",
-        duration: 0.25,
+        duration: 0.15,
+        stagger: {
+          from: "random",
+          each: 0.05,
+        },
       },
     });
 
     timeline
       .to(splitFirstTitle.chars, {
         y: "-150%",
-        stagger: {
-          each: 0.05,
-        },
       })
-      .to(
-        splitSecondTitle.chars,
-        {
-          y: 0,
-          stagger: {
-            each: 0.05,
-          },
-        },
-        "<"
-      );
+      .to(splitSecondTitle.chars, {
+        y: 0,
+      });
 
     element.addEventListener("mouseenter", (e) => {
       if (element.classList.contains("not-done")) return;
@@ -363,6 +366,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       duration: 1,
       ease: "power2.out",
     },
+    onComplete: () => {
+      timeline.kill();
+    },
   });
 
   timeline.to(splitPreloadLogo.chars, {
@@ -408,7 +414,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         duration: 3,
         absolute: true,
         ease: "expo.inOut",
-        toggleClass: "flipping",
         scale: true,
       });
 
@@ -440,6 +445,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         pointerEvents: "auto",
         ease: "power3.out",
         duration: 0.5,
+      });
+      gsap.to(".rotate-char-l-logo", {
+        rotateX: 540,
+        repeat: -1,
+        duration: 2,
+        repeatDelay: 1.5,
+        yoyo: true,
+        ease: "easeInOutQuart",
       });
     },
   });
@@ -473,6 +486,36 @@ document.addEventListener("DOMContentLoaded", async () => {
     },
     "<"
   );
+
+  handelResponsiveMobileFunction(mediaQuery, () => {
+    timeline.to(".keep-scroll", {
+      opacity: 1,
+      onComplete: () => {
+        const timelineKeepScroll = gsap.timeline({
+          defaults: {
+            repeat: -1,
+            ease: "power4.inOut",
+            duration: 1,
+            repeatDelay: 2,
+          },
+          onComplete: () => {
+            timelineKeepScroll.kill();
+          },
+        });
+
+        timelineKeepScroll.to(".scrollbar-animation", {
+          scaleY: 1,
+          transformOrigin: "top",
+        });
+
+        timelineKeepScroll.to(".scrollbar-animation", {
+          delay: 0.25,
+          scaleY: 0,
+          transformOrigin: "bottom",
+        });
+      },
+    });
+  });
 
   timeline.to(".animations-title", {
     opacity: 1,

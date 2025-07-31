@@ -1,0 +1,146 @@
+:root {
+  --primary-color: #eaeaea;
+  --secondary-color: #131313;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "PP Mori";
+  src: url("/assets/fonts/PPMoriRegular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+a {
+  text-decoration: none;
+  color: currentColor;
+}
+
+body {
+  font-family: "PP Mori", sans-serif;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+}
+
+* Default style lenis for smooth scroll */ html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+.lenis.lenis-autoToggle {
+  transition-property: overflow;
+  transition-duration: 1ms;
+  transition-behavior: allow-discrete;
+}
+
+/* End line of style lenis smooth scroll */
+
+.overlay {
+  background-color: var(--primary-color);
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100dvh;
+}
+
+.gallery {
+  width: 100%;
+  height: 120dvh;
+  position: relative;
+  clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0);
+}
+
+.poster {
+  width: 20vw;
+  height: 25vw;
+  overflow: hidden;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  clip-path: inset(0 0 0 0 round 10px);
+  z-index: 10;
+}
+
+.outro {
+  width: 100%;
+  height: 100dvh;
+  clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0);
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.outro .hover-text {
+  font-weight: 500;
+  font-size: 5em;
+  cursor: pointer;
+  z-index: 11;
+}
+
+.card-image {
+  will-change: transform;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: center;
+}
+
+.site {
+  position: absolute;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 2em;
+  top: 1rem;
+  right: 1rem;
+  z-index: 12;
+}
+
+.site::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: var(--secondary-color);
+  width: 100%;
+  height: 2px;
+  transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.24, 0.43, 0.15, 0.97);
+}
+
+.site:hover::before {
+  transform: scaleX(0);
+  transform-origin: right;
+}

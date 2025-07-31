@@ -50,10 +50,6 @@ p {
   font-size: calc(30 / var(--vw) * var(--multiplier));
 }
 
-.outro h1 {
-  letter-spacing: 0.5rem;
-}
-
 .scrolling {
   position: relative;
   width: 100%;
@@ -94,6 +90,7 @@ p {
 }
 
 .wrapper-video {
+  --mask-path: inset(20% 40% 20% 40% round 15px);
   width: 100%;
   height: 100dvh;
   position: absolute;
@@ -176,4 +173,19 @@ p {
 .site:hover::before {
   transform: scaleX(0);
   transform-origin: right;
+}
+
+@media (max-width: 768px) {
+  .wrapper-video {
+    --mask-path: inset(20% 20% 20% 20% round 15px);
+    clip-path: var(--mask-path);
+  }
+
+  .play-btn {
+    width: 55%;
+  }
+
+  .marquee-inner p {
+    font-size: calc(40 / var(--vw) * var(--multiplier));
+  }
 }
