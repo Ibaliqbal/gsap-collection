@@ -532,8 +532,12 @@ ion-icon {
     font-size: 24px;
   }
 
+  .infinite-text-inner {
+    font-size: calc(50 / var(--vw) * var(--multiplier));
+  }
+
   .logo {
-    margin: 1rem 0;
+    margin: .5rem 0;
   }
 
   .loader-spinner {
