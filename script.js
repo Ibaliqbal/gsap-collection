@@ -192,6 +192,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   initLenis(lenis);
 
+  lenis.stop();
+
   const rootStyle = getComputedStyle(document.documentElement);
   const rootVariableCss = {
     primaryColor: rootStyle.getPropertyValue("--primary-color"), // #eaeaea
@@ -217,6 +219,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const listWrapper = document.querySelector(".list-wrapper");
   let lastIndexHoverListAnimation = 0;
   const mediaQuery = window.matchMedia("(min-width: 768px)");
+  const marquee = document.querySelector(".infinite-text-wrapper");
 
   renderListAnimations(listAnimationContainer, list_animations);
 
@@ -417,6 +420,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         scale: true,
       });
 
+      lenis.start();
+
       document.querySelector(".preloader").remove();
     },
   });
@@ -453,6 +458,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         repeatDelay: 1.5,
         yoyo: true,
         ease: "easeInOutQuart",
+      });
+      gsap.to(marquee, {
+        y: 0,
+        duration: 1,
+        ease: "power3.inOut",
       });
     },
   });
@@ -496,10 +506,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             repeat: -1,
             ease: "power4.inOut",
             duration: 1,
-            repeatDelay: 2,
-          },
-          onComplete: () => {
-            timelineKeepScroll.kill();
+            repeatDelay: 2.5,
           },
         });
 
@@ -508,11 +515,32 @@ document.addEventListener("DOMContentLoaded", async () => {
           transformOrigin: "top",
         });
 
-        timelineKeepScroll.to(".scrollbar-animation", {
-          delay: 0.25,
-          scaleY: 0,
-          transformOrigin: "bottom",
-        });
+        timelineKeepScroll.to(
+          [".scrollbar-animation-left", ".scrollbar-animation-right"],
+          {
+            scaleY: 1,
+            transformOrigin: "bottom",
+          },
+          "<+.25"
+        );
+
+        timelineKeepScroll.to(
+          ".scrollbar-animation",
+          {
+            scaleY: 0,
+            transformOrigin: "bottom",
+          },
+          "+=0.25"
+        );
+
+        timelineKeepScroll.to(
+          [".scrollbar-animation-left", ".scrollbar-animation-right"],
+          {
+            scaleY: 0,
+            transformOrigin: "top",
+          },
+          "<+.25"
+        );
       },
     });
   });

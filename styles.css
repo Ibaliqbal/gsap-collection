@@ -15,7 +15,6 @@
 ::selection {
   background-color: var(--secondary-color);
   color: var(--primary-color);
-  text-decoration: var(--primary-color);
 }
 
 ::-webkit-scrollbar {
@@ -234,6 +233,36 @@ ion-icon {
   z-index: 0;
 }
 
+.infinite-text-wrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  height: max-content;
+  padding-left: 1rem;
+  transform: translateY(-100%);
+  will-change: transform;
+}
+
+.infinite-text-inner {
+  width: max-content;
+  padding: 1rem 0;
+  display: flex;
+  gap: 0.8rem;
+  animation: marquee 30s linear infinite;
+  font-size: calc(15 / var(--vw) * var(--multiplier));
+  will-change: transform;
+}
+
+.infinite-text-wrapper:hover .infinite-text-inner {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 .logo.active {
   display: block;
   z-index: 10;
@@ -336,16 +365,46 @@ ion-icon {
 }
 
 .scrollbar-animation {
-  width: 3px;
-  height: 7em;
+  width: 2px;
+  height: 4.5em;
   background-color: var(--secondary-color);
   transform: scaleY(0);
   border-radius: 7px;
+  will-change: transform;
+}
+
+.scrollbar-wrapper {
+  width: 2px;
+  height: 1em;
+  border-radius: 7px;
+  will-change: transform;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform-origin: bottom;
+}
+
+.scrollbar-wrapper.left {
+  transform: rotate(-45deg);
+}
+
+.scrollbar-wrapper.right {
+  transform: rotate(45deg);
+}
+
+.scrollbar-animation-left,
+.scrollbar-animation-right {
+  will-change: transform;
+  border-radius: inherit;
+  width: 100%;
+  height: 100%;
+  background-color: var(--secondary-color);
+  transform: scaleY(0);
 }
 
 .keep-scroll p {
   position: absolute;
-  top: 50%;
+  top: 45%;
   transform: translateY(-50%) rotate(90deg);
   left: 0.25em;
   font-family: "PP Editorial", serif;
@@ -464,7 +523,7 @@ ion-icon {
   position: relative;
 }
 
-.footer h4 {
+.footer p {
   font-weight: 400;
 }
 
