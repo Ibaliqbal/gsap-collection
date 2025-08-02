@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const bgWhiteButton = document.querySelector(".bg-white");
   const previewImage = document.querySelector(".preview-image");
   const wrapperImages = document.querySelector(".wrapper-images");
+  const mainContainer = document.querySelector(".main-content");
   let isAnimating = false;
   const allImage = document.querySelectorAll(".card-image");
 
@@ -23,11 +24,19 @@ document.addEventListener("DOMContentLoaded", () => {
     if (isAnimating) return;
     isAnimating = true;
     buttonSlides.disabled = true;
+
+    gsap.to(bgWhiteButton, {
+      translateX: 0,
+      ease: "power2.inOut",
+      duration: 1,
+    });
+
     buttonSlides.classList.remove("is-current");
     buttonGrid.classList.add("is-current");
 
     const state = Flip.getState(allImage);
 
+    mainContainer.classList.remove("slides");
     wrapperImages.classList.remove("slides");
 
     Flip.from(state, {
@@ -46,12 +55,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       },
     });
-
-    gsap.to(bgWhiteButton, {
-      translateX: 0,
-      ease: "power2.inOut",
-      duration: 1,
-    });
   });
 
   buttonSlides.addEventListener("click", () => {
@@ -61,6 +64,13 @@ document.addEventListener("DOMContentLoaded", () => {
     lenis.scrollTo(0, {
       duration: 0.001,
     });
+
+    gsap.to(bgWhiteButton, {
+      translateX: 80,
+      ease: "power2.inOut",
+      duration: 1,
+    });
+
     buttonGrid.classList.remove("is-current");
     buttonSlides.classList.add("is-current");
     gsap.to(previewImage, {
@@ -71,6 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const state = Flip.getState(allImage);
 
+    mainContainer.classList.add("slides");
     wrapperImages.classList.add("slides");
 
     Flip.from(state, {
@@ -86,12 +97,6 @@ document.addEventListener("DOMContentLoaded", () => {
         isAnimating = false;
         buttonGrid.disabled = false;
       },
-    });
-
-    gsap.to(bgWhiteButton, {
-      translateX: 80,
-      ease: "power2.inOut",
-      duration: 1,
     });
   });
 });
