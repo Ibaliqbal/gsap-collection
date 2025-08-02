@@ -65,6 +65,12 @@ const list_animations = [
     preview: "/assets/images/demo/layout-faintfilm.png",
     baseColor: "primaryColor",
   },
+  {
+    title: "Scroll Slider Faint Film",
+    href: "/scroll-slider-faintfilm/index.html",
+    preview: "/assets/images/demo/scroll-slider-faintfilm.png",
+    baseColor: "primaryColor",
+  },
 ];
 
 async function loadFont(target, config) {

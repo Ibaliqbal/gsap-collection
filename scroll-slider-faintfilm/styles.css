@@ -1,0 +1,148 @@
+:root {
+  --primary-color: #eaeaea;
+  --secondary-color: #f2f2f2;
+  --vw: 1440;
+  --multiplier: 100vw;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+@font-face {
+  font-family: "Neue Montreal Medium";
+  src: url("/assets/fonts/NeueMontrealMedium.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+}
+
+body {
+  background-color: var(--primary-color);
+  font-family: "Neue Montreal Medium";
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.intro,
+.outro {
+  width: 100%;
+  height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 2rem;
+  justify-content: center;
+}
+
+.intro h1,
+.outro h1 {
+  max-width: 90vw;
+  font-size: clamp(1.5em, 5vw, 3em);
+  text-indent: 4em;
+}
+
+.slides {
+  width: 100%;
+  height: 100dvh;
+  min-height: 800px;
+  max-height: 100dvh;
+  background-color: var(--secondary-color);
+  overflow: hidden;
+  position: relative;
+}
+
+.wrapper-slider {
+  padding-left: 2rem;
+  width: fit-content;
+  height: 100%;
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  --width-card: 60svh;
+  --height-card: 40svh;
+  z-index: 2;
+  flex-wrap: nowrap;
+  position: sticky;
+  top: 0;
+  will-change: transform;
+}
+
+.card-slide {
+  width: var(--width-card);
+  height: var(--height-card);
+  position: relative;
+  display: flex;
+  gap: 1rem;
+}
+
+.card-slide .image {
+  flex-grow: 1;
+  position: relative;
+  cursor: pointer;
+  filter: grayscale(0.7);
+}
+
+.image::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0;
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.2s ease-in-out;
+  z-index: 1;
+}
+
+.image::after {
+  content: "+";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  color: var(--primary-color);
+  opacity: 0;
+  z-index: 2;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.image:hover::before {
+  opacity: 0.7;
+}
+
+.image:hover::after {
+  opacity: 1;
+}
+
+.bg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.wrapper-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  will-change: opacity;
+}
+
+@media (max-width: 768px) {
+  .wrapper-slider {
+    --width-card: 55svh;
+  }
+}

@@ -97,6 +97,8 @@ a {
   grid-template-columns: repeat(4, 1fr);
   gap: 2.5em;
   align-items: center;
+  --width-card: 9vw;
+  --heigth-card: 8vw;
 }
 
 .wrapper-images.slides {
@@ -106,6 +108,8 @@ a {
   min-height: 100dvh;
   gap: 40px;
   flex-wrap: nowrap;
+  --width-card: 60svh;
+  --heigth-card: 40svh;
 }
 
 .main-content .preview-image {
@@ -133,13 +137,8 @@ a {
   display: flex;
   gap: 1rem;
   filter: grayscale(1);
-  width: 9vw;
-  height: 8vw;
-}
-
-.wrapper-images.slides .card-image {
-  width: 60svh;
-  height: 40svh;
+  width: var(--width-card);
+  height: var(--heigth-card);
 }
 
 .image {
