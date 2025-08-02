@@ -1,6 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  gsap.registerPlugin(CustomEase);
-  CustomEase.create("hop", "0.9, 0, 1, 0.1");
   const lenis = new Lenis();
 
   // Use requestAnimationFrame to continuously update the scroll

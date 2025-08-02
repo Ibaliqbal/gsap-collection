@@ -103,7 +103,7 @@ html.lenis body {
 
 .outro .hover-text {
   font-weight: 500;
-  font-size: 5em;
+  font-size: clamp(2em, 5vw, 5em);
   cursor: pointer;
   z-index: 11;
 }
@@ -143,4 +143,11 @@ html.lenis body {
 .site:hover::before {
   transform: scaleX(0);
   transform-origin: right;
+}
+
+@media (max-width: 768px) {
+  .poster {
+    width: 40vw;
+    height: 45vw;
+  }
 }

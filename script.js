@@ -59,6 +59,12 @@ const list_animations = [
     preview: "/assets/images/demo/split-vignette.png",
     baseColor: "primaryColor",
   },
+  {
+    title: "Layout Transition Faint Film",
+    href: "/layout-transition-faintfilm/index.html",
+    preview: "/assets/images/demo/layout-faintfilm.png",
+    baseColor: "primaryColor",
+  },
 ];
 
 async function loadFont(target, config) {
