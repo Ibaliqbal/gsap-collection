@@ -388,8 +388,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   timeline.to(splitPreloadLogo.chars, {
     delay: 1.5,
-    opacity: 1,
-    ease: "power1.out",
+    clipPath: "inset(0% 0% 0% 0%)",
+    ease: "power3.inOut",
     stagger: {
       each: 0.1,
     },
@@ -588,3 +588,237 @@ document.addEventListener("DOMContentLoaded", async () => {
     "-=1"
   );
 });
+
+// const u = [
+//   {
+//     elInner: {
+//       from: {
+//         x: "0%",
+//       },
+//       to: {
+//         x: "100%",
+//       },
+//     },
+//     el: {
+//       from: {
+//         x: "0%",
+//       },
+//       to: {
+//         x: "-100%",
+//       },
+//     },
+//     image: {
+//       from: {
+//         transformOrigin: "bottom 100%",
+//         x: "-60%",
+//         scale: 1,
+//       },
+//       to: {
+//         transformOrigin: "bottom 100%",
+//         x: "-150%",
+//         scale: 0.8,
+//       },
+//     },
+//     imageInner: {
+//       from: {
+//         transformOrigin: "bottom 100%",
+//         x: "-60%",
+//         scale: 1,
+//       },
+//       to: {
+//         transformOrigin: "bottom 100%",
+//         x: "-100%",
+//         scale: 0.8,
+//       },
+//     },
+//   },
+//   {
+//     elInner: {
+//       from: {
+//         x: "-80%",
+//       },
+//       to: {
+//         x: "0%",
+//       },
+//     },
+//     el: {
+//       from: {
+//         x: "80%",
+//       },
+//       to: {
+//         x: "0%",
+//       },
+//     },
+//     image: {
+//       from: {
+//         transformOrigin: "bottom 100%",
+//         x: "-15%",
+//         scale: 0.45,
+//       },
+//       to: {
+//         transformOrigin: "bottom 100%",
+//         x: "-60%",
+//         scale: 1,
+//       },
+//     },
+//   },
+//   {
+//     elInner: {
+//       from: {
+//         x: "-95%",
+//       },
+//       to: {
+//         x: "-80%",
+//       },
+//     },
+//     el: {
+//       from: {
+//         x: "95%",
+//       },
+//       to: {
+//         x: "80%",
+//       },
+//     },
+//     image: {
+//       from: {
+//         transformOrigin: "bottom 100%",
+//         x: 0,
+//         scale: 0.15,
+//       },
+//       to: {
+//         transformOrigin: "bottom 100%",
+//         x: "-15%",
+//         scale: 0.45,
+//       },
+//     },
+//   },
+//   {
+//     elInner: {
+//       from: {
+//         x: "-100%",
+//       },
+//       to: {
+//         x: "-95%",
+//       },
+//     },
+//     el: {
+//       from: {
+//         x: "100%",
+//       },
+//       to: {
+//         x: "95%",
+//       },
+//     },
+//     image: {
+//       from: {
+//         transformOrigin: "bottom 100%",
+//         scale: 0,
+//       },
+//       to: {
+//         transformOrigin: "bottom 100%",
+//         scale: 0.15,
+//       },
+//     },
+//   },
+// ];
+
+// const h = 0.5;
+// let x = 0;
+// for (let j = 0; j < n.value.length - 1; j++) {
+//   let O = 0;
+//   for (let N = 0; N < n.value.length; N++)
+//     u[O]
+//       ? (c.fromTo(
+//           (v = n.value[N + j]) == null ? void 0 : v.refElInner,
+//           u[O].elInner.from,
+//           {
+//             ...u[O].elInner.to,
+//             duration: h,
+//             ease: "power1.inOut",
+//           },
+//           x
+//         ),
+//         c.fromTo(
+//           (I = n.value[N + j]) == null ? void 0 : I.refEl,
+//           u[O].el.from,
+//           {
+//             ...u[O].el.to,
+//             duration: h,
+//             ease: "power1.inOut",
+//           },
+//           x
+//         ),
+//         c.fromTo(
+//           (A = n.value[N + j]) == null ? void 0 : A.refImage,
+//           {
+//             transformOrigin: "center center",
+//             scale: 2 - u[O].image.from.scale,
+//           },
+//           {
+//             scale: 2 - u[O].image.to.scale,
+//             duration: h,
+//             ease: "power1.inOut",
+//           },
+//           x
+//         ),
+//         N + j === n.value.length - 1 && j === n.value.length - 3
+//           ? c.fromTo(
+//               ($ = n.value[N + j]) == null ? void 0 : $.refImageContainer,
+//               {
+//                 ...u[O].image.from,
+//                 x: 0,
+//               },
+//               {
+//                 ...u[O].image.to,
+//                 scale: 0.6,
+//                 x: 0,
+//                 duration: h,
+//                 ease: "power1.inOut",
+//               },
+//               x
+//             )
+//           : N + j === n.value.length - 1 && j === n.value.length - 2
+//           ? c.fromTo(
+//               (b = n.value[N + j]) == null ? void 0 : b.refImageContainer,
+//               {
+//                 ...u[O].image.from,
+//                 x: 0,
+//                 scale: 0.6,
+//               },
+//               {
+//                 ...u[O].image.to,
+//                 x: "-60%",
+//                 duration: h,
+//                 ease: "power1.inOut",
+//               },
+//               x
+//             )
+//           : c.fromTo(
+//               (B = n.value[N + j]) == null ? void 0 : B.refImageContainer,
+//               u[O].image.from,
+//               {
+//                 ...u[O].image.to,
+//                 duration: h,
+//                 ease: "power1.inOut",
+//               },
+//               x
+//             ))
+//       : c.set(
+//           (R = n.value[N + j]) == null ? void 0 : R.refElInner,
+//           {
+//             x: "100%",
+//           },
+//           0
+//         ),
+//       O++;
+//   c.to(
+//     p.value,
+//     {
+//       x: `${-100 + ((j + 2) * 100) / n.value.length}%`,
+//       duration: h,
+//       ease: "power1.inOut",
+//     },
+//     x
+//   ),
+//   x += 0.5;
+// }

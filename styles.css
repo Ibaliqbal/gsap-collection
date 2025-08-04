@@ -268,8 +268,8 @@ ion-icon {
 }
 
 .chars-logo {
-  opacity: 0;
-  will-change: opacity, transform;
+  clip-path: inset(0% 100% 0% 0%);
+  will-change: clip-path, transform;
 }
 
 .chars-logo:first-child {
@@ -529,6 +529,10 @@ ion-icon {
 @media (max-width: 768px) {
   ion-icon {
     font-size: 24px;
+  }
+
+  .link::before {
+    height: 1px;
   }
 
   .infinite-text-inner {

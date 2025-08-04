@@ -1,0 +1,23 @@
+:root {
+  --primary-color: #eaeaea;
+  --secondary-color: #131313;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "Alliance";
+  src: url("/assets/fonts/Alliance.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+}
+
+body {
+  font-family: "Alliance";
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+}
