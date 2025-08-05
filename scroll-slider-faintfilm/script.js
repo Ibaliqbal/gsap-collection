@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const mediaQuery = window.matchMedia("(min-width: 768px)");
   gsap.registerPlugin(ScrollTrigger);
   const lenis = new Lenis();
   lenis.on("scroll", ScrollTrigger.update);
@@ -16,11 +17,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const wrapperBg = document.querySelectorAll(".wrapper-bg");
 
   gsap.to(wrapperSlider, {
-    x: `-${cardWidth * cardImages.length + cardWidth * 0.4 - cardWidth}px`,
+    x: `-${
+      cardWidth * cardImages.length + cardWidth * 0.4 - mediaQuery
+        ? 0
+        : cardWidth
+    }px`,
     scrollTrigger: {
       trigger: slides,
       pin: true,
-      start: "center center",
+      start: "top ctop",
       end: `+=10000px`,
       scrub: 1,
       invalidateOnRefresh: 1,

@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: ".gallery",
-      start: "center center",
+      start: "top top",
       end: `+=${galleryItemsWrapper.length * 100}%`,
       pin: true,
       scrub: true,
@@ -171,7 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     for (let N = 0; N < galleryItemsWrapper.length; N++) {
       const targetIndex = N + j;
-      
+
       if (
         targetIndex >= galleryItemsWrapper.length ||
         configIndex >= configGallerySlider.length
