@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   gsap.ticker.lagSmoothing(0);
   const wrapperText = document.querySelector(".wrapper-text");
-  const end = wrapperText.offsetWidth - window.innerWidth + 4.5 * 16;
+  const end = wrapperText.offsetWidth - window.innerWidth + 2.5 * 16;
   const textSplit = await loadFont(".text", {
     type: "chars",
     charsClass: "char-text",
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     rotate: 0,
     rotateX: 0,
     stagger: {
-      each: 0.075,
+      each: mediaQuery.matches ? 0.25 : 0.075,
     },
     scrollTrigger: {
       trigger: ".scrolling",
