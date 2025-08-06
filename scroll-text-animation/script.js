@@ -27,6 +27,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     charsClass: "char-text",
   });
 
+  console.log(end);
+
   textSplit.chars.forEach((char) => {
     gsap.set(char, {
       rotate: randomNumber(-30, 30),
@@ -54,7 +56,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     scrollTrigger: {
       trigger: ".scrolling",
       start: "top top",
-      end: `+=${end + 200}`,
+      end: `+=${end}`,
       pin: true,
       scrub: true,
       onEnter: () => {
@@ -87,7 +89,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     scrollTrigger: {
       trigger: ".scrolling",
       start: mediaQuery.matches ? "top top" : "top top+=200",
-      end: `+=${end + 200}`,
+      end: `+=${end - 500}`,
       scrub: true,
     },
   });
