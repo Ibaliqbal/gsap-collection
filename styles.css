@@ -10,6 +10,7 @@
   --base-page-reveal-color: #ff4d07;
   --base-telescope-color: #f4f3f0;
   --base-vooban-color: #1458e4;
+  --base-scroll-text-color: #ffffff;
 }
 
 ::selection {
@@ -139,14 +140,8 @@ ion-icon {
   display: none;
 }
 
-.rotate-char-wrapper {
-  perspective: 750px;
-  display: inline-block;
-  position: relative;
-}
-
 .rotate-char-l-logo {
-  display: block;
+  display: inline-block;
   will-change: transform;
 }
 

@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   gsap.to(wrapperSlider, {
     x: `-${
-      cardWidth * cardImages.length + cardWidth * 0.4 - mediaQuery
+      cardWidth * cardImages.length + cardWidth * 0.4 - mediaQuery.matches
         ? 0
         : cardWidth
     }px`,

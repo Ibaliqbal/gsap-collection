@@ -60,24 +60,34 @@ const list_animations = [
     baseColor: "primaryColor",
   },
   {
-    title: "Layout Transition Faint Film",
+    title: "Layout Transition Faint Film Awwward",
     href: "/layout-transition-faintfilm/index.html",
     preview: "/assets/images/demo/layout-faintfilm.png",
     baseColor: "primaryColor",
   },
   {
-    title: "Scroll Slider Faint Film",
+    title: "Scroll Slider Faint Film Awwward",
     href: "/scroll-slider-faintfilm/index.html",
     preview: "/assets/images/demo/scroll-slider-faintfilm.png",
     baseColor: "primaryColor",
   },
   {
-    title: "Scroll Animation Akaru",
+    title: "Scroll Animation Akaru Awwward",
     href: "/scroll-animation-akaru/index.html",
     preview: "/assets/images/demo/scroll-akaru.png",
     baseColor: "primaryColor",
   },
+  {
+    title: "Scroll Text Animation",
+    href: "/scroll-text-animation/index.html",
+    preview: "/assets/images/demo/scroll-text.png",
+    baseColor: "baseColorScrollText",
+  },
 ];
+
+function randomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 async function loadFont(target, config) {
   await document.fonts.ready;
@@ -207,11 +217,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   CustomEase.create("hoverEase", "0.65, 0.05, 0, 1");
   CustomEase.create("easeInOutQuart", ".645, .045, .355, 1");
   const lenis = new Lenis();
-  
+
   initLenis(lenis);
 
   lenis.scrollTo(0);
-
 
   lenis.stop();
 
@@ -232,6 +241,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     ), // #ff4d07
     baseColorTelescope: rootStyle.getPropertyValue("--base-telescope-color"), // #f4f3f0
     baseColorVooban: rootStyle.getPropertyValue("--base-vooban-color"), // #1458e4
+    baseColorScrollText: rootStyle.getPropertyValue("--base-scroll-text-color"), // #ffffff
   };
 
   const container = document.querySelector(".main-container");
@@ -413,6 +423,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   timeline.to(splitPreloadLogo.chars, {
     y: 0,
     x: 0,
+    rotateX: 0,
     ease: "power4.out",
     stagger: {
       each: 0.1,
