@@ -352,6 +352,9 @@ ion-icon {
 }
 
 .keep-scroll {
+  --height-arrow: 4em;
+  --width-arrow: 2px;
+  --rounded: 7px;
   position: absolute;
   bottom: 1rem;
   left: 1rem;
@@ -359,18 +362,18 @@ ion-icon {
 }
 
 .scrollbar-animation {
-  width: 2px;
-  height: 4.5em;
+  width: var(--width-arrow);
+  height: var(--height-arrow);
   background-color: var(--secondary-color);
   transform: scaleY(0);
-  border-radius: 7px;
+  border-radius: var(--rounded);
   will-change: transform;
 }
 
 .scrollbar-wrapper {
-  width: 2px;
-  height: 1em;
-  border-radius: 7px;
+  width: var(--width-arrow);
+  height: calc(var(--height-arrow) / 4);
+  border-radius: var(--rounded);
   will-change: transform;
   position: absolute;
   bottom: 0;
