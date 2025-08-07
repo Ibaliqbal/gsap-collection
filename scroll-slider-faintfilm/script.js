@@ -17,15 +17,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const wrapperBg = document.querySelectorAll(".wrapper-bg");
 
   gsap.to(wrapperSlider, {
-    x: `-${
-      cardWidth * cardImages.length + cardWidth * 0.4 - mediaQuery.matches
-        ? 0
-        : cardWidth
-    }px`,
+    x: `-${cardWidth * cardImages.length + cardWidth * 0.4 - cardWidth}px`,
     scrollTrigger: {
       trigger: slides,
       pin: true,
-      start: "top ctop",
+      start: "top top",
       end: `+=10000px`,
       scrub: 1,
       invalidateOnRefresh: 1,

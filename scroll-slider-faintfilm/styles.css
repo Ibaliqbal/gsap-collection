@@ -53,8 +53,6 @@ img {
 .slides {
   width: 100%;
   height: 100dvh;
-  min-height: 800px;
-  max-height: 100dvh;
   background-color: var(--secondary-color);
   overflow: hidden;
   position: relative;
@@ -70,9 +68,6 @@ img {
   --width-card: 60svh;
   --height-card: 40svh;
   z-index: 2;
-  flex-wrap: nowrap;
-  position: sticky;
-  top: 0;
   will-change: transform;
 }
 
@@ -131,6 +126,7 @@ img {
   inset: 0;
   overflow: hidden;
   pointer-events: none;
+  z-index: -1;
 }
 
 .wrapper-bg {
