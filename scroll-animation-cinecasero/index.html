@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <section class="intro"><h1>Intro</h1></section>
+    <section class="scrolling">
+      <div class="grid">
+        <div class="left-outer">
+          <img src="/assets/images/img 1.jpg" alt="" />
+        </div>
+        <div class="left">
+          <img src="/assets/images/img 2.jpg" alt="" />
+          <img src="/assets/images/img 3.jpg" alt="" />
+        </div>
+        <div class="center">
+          <img src="/assets/images/img 23.jpg" alt="" />
+        </div>
+        <div class="right">
+          <img src="/assets/images/img 20.jpg" alt="" /><img
+            src="/assets/images/img 21.jpg"
+            alt=""
+          />
+        </div>
+        <div class="right-outer">
+          <img src="/assets/images/img 22.jpg" alt="" />
+        </div>
+        <div
+          class="overlay"
+          style="--mask-path: inset(0% 35% 0% 35% round 15px)"
+        >
+          <video src="/assets/videos/video 1.mp4" muted loop></video>
+        </div>
+      </div>
+    </section>
+    <section class="outro"><h1>Outro</h1></section>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.3.8/dist/lenis.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
