@@ -83,6 +83,12 @@ const list_animations = [
     preview: "/assets/images/demo/scroll-text.png",
     baseColor: "baseColorScrollText",
   },
+  {
+    title: "Scroll Animation Cine Casero Awwward",
+    href: "/scroll-animation-cinecasero/index.html",
+    preview: "/assets/images/demo/scroll-cinecasero.png",
+    baseColor: "baseColorScrollText",
+  },
 ];
 
 function randomNumber(min, max) {
@@ -242,6 +248,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     baseColorTelescope: rootStyle.getPropertyValue("--base-telescope-color"), // #f4f3f0
     baseColorVooban: rootStyle.getPropertyValue("--base-vooban-color"), // #1458e4
     baseColorScrollText: rootStyle.getPropertyValue("--base-scroll-text-color"), // #ffffff
+    baseColorCineCasero: rootStyle.getPropertyValue("--base-cine-casero-color"), // #eae9e4
   };
 
   const container = document.querySelector(".main-container");
