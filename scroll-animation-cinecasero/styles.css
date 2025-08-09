@@ -11,7 +11,18 @@
   font-weight: 400;
 }
 
+a {
+  text-decoration: none;
+  color: currentColor;
+}
+
 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+video {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -47,6 +58,14 @@ body {
   max-width: 90vw;
   font-size: clamp(1.5em, 5vw, 3em);
   text-indent: 4em;
+}
+
+.site {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  font-weight: 600;
+  font-size: 1.25em;
 }
 
 .scrolling {
