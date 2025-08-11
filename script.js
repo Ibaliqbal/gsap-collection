@@ -89,6 +89,12 @@ const list_animations = [
     preview: "/assets/images/demo/scroll-cinecasero.png",
     baseColor: "baseColorScrollText",
   },
+  {
+    title: "Scroll Text Animation Boring Awwward",
+    href: "/scroll-text-boring-awwward/index.html",
+    preview: "/assets/images/demo/scroll-text-boring.png",
+    baseColor: "baseColorScrollText",
+  },
 ];
 
 function randomNumber(min, max) {
