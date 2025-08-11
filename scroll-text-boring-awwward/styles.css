@@ -1,3 +1,8 @@
+:root {
+  --primary-color: #f5f4ed;
+  --secondary-color: #000000;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -13,4 +18,105 @@
 
 body {
   font-family: "Neue Montreal";
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.intro,
+.outro {
+  width: 100%;
+  height: 100dvh;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  font-size: calc(40 / var(--vw) * var(--multiplier));
+  padding-bottom: 1rem;
+}
+
+.intro h1,
+.outro h1 {
+  max-width: 90vw;
+  text-indent: 5em;
+  font-size: clamp(1em, 5vw, 2em);
+}
+
+.scrolling {
+  width: 100%;
+  height: 100svh;
+}
+
+.wrapper-scrolling {
+  width: 100%;
+  padding-inline: 0.875rem;
+  margin-inline: auto;
+  max-width: 64rem;
+  height: 100%;
+}
+
+.layout-text {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.big-text {
+  width: 67%;
+  font-size: 7vw;
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  padding-inline: 2rem;
+}
+
+.big-text-line2 {
+  align-self: self-end;
+}
+
+.big-text-line3 {
+  position: relative;
+  display: inline-block;
+}
+
+.text-wrap {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  padding: 0.5rem;
+}
+
+.text-wrap h1 {
+  will-change: transform;
+}
+
+.text-wrap h1:last-of-type {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(120%);
+}
+
+.small-text {
+  width: 33%;
+  font-size: 2em;
+  line-height: 1;
+  text-indent: 2em;
+}
+
+.divider {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-color: var(--secondary-color);
+  width: 100%;
+  height: 10px;
+  transform: scaleX(0);
+  will-change: transform;
+  transform-origin: left;
 }

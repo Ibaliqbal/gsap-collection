@@ -56,7 +56,7 @@ body {
 .intro h1,
 .outro h1 {
   max-width: 90vw;
-  font-size: clamp(1.5em, 5vw, 3em);
+  font-size: clamp(1em, 5vw, 2em);
   text-indent: 4em;
 }
 
