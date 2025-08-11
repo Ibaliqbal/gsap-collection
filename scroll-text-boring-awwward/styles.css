@@ -22,6 +22,11 @@ body {
   color: var(--secondary-color);
 }
 
+a {
+  text-decoration: none;
+  color: currentColor;
+}
+
 ::-webkit-scrollbar {
   display: none;
 }
@@ -37,6 +42,7 @@ body {
   align-items: flex-end;
   font-size: calc(40 / var(--vw) * var(--multiplier));
   padding-bottom: 1rem;
+  position: relative;
 }
 
 .intro h1,
@@ -44,6 +50,14 @@ body {
   max-width: 90vw;
   text-indent: 5em;
   font-size: clamp(1em, 5vw, 2em);
+}
+
+.site {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  font-weight: 600;
+  font-size: 1.25em;
 }
 
 .scrolling {
