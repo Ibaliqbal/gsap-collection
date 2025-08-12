@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     scrollTrigger: {
       trigger: ".scrolling",
       start: mediaQuery.matches ? "top top" : "top top+=200",
-      end: `+=${end - 500}`,
+      end: `+=${end - wrapperText.offsetWidth / window.innerWidth / 2}`,
       scrub: true,
     },
   });

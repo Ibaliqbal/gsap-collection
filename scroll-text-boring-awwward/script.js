@@ -37,6 +37,13 @@ document.addEventListener("DOMContentLoaded", () => {
           y: `-${progressText}%`,
           stagger: 0,
         });
+      } else if (progress > 7) {
+        gsap.set(lastTexts, {
+          y: "0%",
+        });
+        gsap.set(firstTexts, {
+          y: `${yPercent}%`,
+        });
       }
 
       if (progress >= 7 && progress <= 9) {

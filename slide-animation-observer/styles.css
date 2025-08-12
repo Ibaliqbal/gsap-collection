@@ -1,0 +1,78 @@
+:root {
+  --primary-color: #1e1d1d;
+  --secondary-color: #ececec;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "PP Mori";
+  src: url("/assets/fonts/PPMoriRegular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+body {
+  font-family: "PP Mori";
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+}
+
+.main-content {
+  width: 100%;
+  height: 100dvh;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  will-change: transform, filter;
+}
+
+.bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.title-slide {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3vw;
+}
+
+.scroll-text {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5vw;
+  letter-spacing: 0.25rem;
+  line-height: 1;
+}
+
+@media (max-width: 768px) {
+  .scroll-text {
+    font-size: 3vw;
+  }
+}

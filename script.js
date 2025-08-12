@@ -95,6 +95,12 @@ const list_animations = [
     preview: "/assets/images/demo/scroll-text-boring.png",
     baseColor: "baseColorScrollText",
   },
+  {
+    title: "Slide Animation Observer",
+    href: "/slide-animation-observer/index.html",
+    preview: "/assets/images/demo/slide-animation-observer.png",
+    baseColor: "baseColorSlideObserver",
+  },
 ];
 
 function randomNumber(min, max) {
@@ -255,6 +261,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     baseColorVooban: rootStyle.getPropertyValue("--base-vooban-color"), // #1458e4
     baseColorScrollText: rootStyle.getPropertyValue("--base-scroll-text-color"), // #ffffff
     baseColorCineCasero: rootStyle.getPropertyValue("--base-cine-casero-color"), // #eae9e4
+    baseColorSlideObserver: rootStyle.getPropertyValue("--base-slide-observer-color") // #1e1d1d
   };
 
   const container = document.querySelector(".main-container");
@@ -465,8 +472,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         scale: true,
       });
 
-      lenis.start();
-
       document.querySelector(".preloader").remove();
     },
   });
@@ -592,6 +597,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   timeline.to(".animations-title", {
     opacity: 1,
+    onComplete: () => {
+      lenis.start();
+    },
   });
 
   timeline.to(".divider", {
