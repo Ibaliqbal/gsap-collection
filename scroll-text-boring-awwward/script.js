@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
 
-      if (progress >= 7 && progress <= 9) {
+      if (progress >= 7 && progress <= 10) {
         const dividerProgress = progress - 7;
         console.log(dividerProgress);
         gsap.set(divider, {

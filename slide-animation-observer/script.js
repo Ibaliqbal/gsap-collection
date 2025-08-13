@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-  gsap.registerPlugin(Observer, SplitText);
+  gsap.registerPlugin(Observer, SplitText, CustomEase);
+
+  CustomEase.create("hop", "0.7, 0, 0, 1");
 
   let lastIndex = 0,
     isAnimating = true;
@@ -46,14 +48,10 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   function goToSection(index, direction) {
-    if (isAnimating) return;
-
     isAnimating = true;
 
     const isGoDown = direction === 1,
       dFactor = isGoDown ? 1 : -1;
-
-    console.log(splitTitle[lastIndex].chars.length / 2);
 
     const timeline = gsap.timeline({
       onComplete: () => {
@@ -88,7 +86,6 @@ document.addEventListener("DOMContentLoaded", () => {
         {
           scale: scaleSlide,
           filter: grayscaleSlide,
-          ease: "expo.inOut",
         },
         `-=${
           splitTitle[lastIndex].chars.length /
@@ -97,18 +94,19 @@ document.addEventListener("DOMContentLoaded", () => {
       )
       .to(slides[lastIndex], {
         xPercent: -100 * dFactor,
+        ease: "hop",
       })
       .to(
         slides[index],
         {
           xPercent: 0,
+          ease: "hop",
         },
         "<"
       )
       .to(slides[index], {
         scale: 1,
         filter: "grayscale(0)",
-        ease: "expo.inOut",
       })
       .to(
         splitTitle[index].chars,

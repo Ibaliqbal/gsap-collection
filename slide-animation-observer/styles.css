@@ -59,6 +59,9 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 3vw;
+  text-align: center;
+  white-space: nowrap;
+  max-width: 90%;
 }
 
 .scroll-text {
@@ -72,6 +75,10 @@ body {
 }
 
 @media (max-width: 768px) {
+  .title-slide {
+    font-size: 4vw;
+  }
+
   .scroll-text {
     font-size: 3vw;
   }
