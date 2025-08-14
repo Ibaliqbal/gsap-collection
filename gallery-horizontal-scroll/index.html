@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gallery Horizontal Scroll — Creative Club</title>
+    <link
+      rel="shortcut icon"
+      href="/assets/images/base/favicon.ico"
+      type="image/x-icon"
+    />
+    <!-- Basic Meta Tags -->
+    <meta
+      name="description"
+      content="Gallery Horizontal Scroll — Creative Club. An immersive scrolling gallery inspired by Tomoya Okada's playground, recreated with smooth animations and elegant design. Experience a dynamic flow of captivating images in a seamless horizontal journey."
+    />
+
+    <meta
+      name="keywords"
+      content="GSAP, GSAP animation, GreenSock, web animation, interactive UI, motion design, front-end development, creative coding, open-source project, JavaScript animation, creative developer, scroll animation, web transitions, animation library, UI animation"
+    />
+
+    <!-- Open Graph (for Facebook, LinkedIn, etc.) -->
+    <meta
+      property="og:title"
+      content="Gallery Horizontal Scroll — Creative Club"
+    />
+    <meta
+      property="og:description"
+      content="Gallery Horizontal Scroll — Creative Club. An immersive scrolling gallery inspired by Tomoya Okada's playground, recreated with smooth animations and elegant design. Experience a dynamic flow of captivating images in a seamless horizontal journey."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://creativeclub.vercel.app/gallery-horizontal-scroll/index.html"
+    />
+    <meta
+      property="og:image"
+      content="https://creativeclub.vercel.app/assets/images/base/creative.png"
+    />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Gallery Horizontal Scroll — Creative Club"
+    />
+    <meta
+      name="twitter:description"
+      content="Gallery Horizontal Scroll — Creative Club. An immersive scrolling gallery inspired by Tomoya Okada's playground, recreated with smooth animations and elegant design. Experience a dynamic flow of captivating images in a seamless horizontal journey."
+    />
+    <meta
+      name="twitter:image"
+      content="https://creativeclub.vercel.app/assets/images/base/creative.png"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="/assets/css/default-lenis.css" />
+  </head>
+  <body>
+    <section class="intro">
+      <a
+        href="https://tomoyaokada.com/playground/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="site"
+        >Original Site</a
+      >
+      <h1>
+        Step into a visual journey where every scroll unveils a new perspective.
+        This gallery flows seamlessly, guiding your eyes through moments frozen
+        in time — each frame telling its own story.
+      </h1>
+    </section>
+    <section class="scrolling">
+      <div class="wrapper-content">
+        <div class="left-content">
+          <h1 class="title-content">world</h1>
+          <p class="description-content">
+            The beauty of this gallery lies in its seamless horizontal scroll,
+            allowing viewers to experience a dynamic flow of captivating images.
+            Each photograph is thoughtfully arranged, creating a visually
+            engaging journey that draws attention to both individual details and
+            the overall composition. The elegant layout, combined with smooth
+            transitions, enhances the sense of immersion and makes browsing the
+            collection a delightful and memorable experience.
+          </p>
+        </div>
+        <div class="right-content">
+          <div class="wrapper-image">
+            <img src="/assets/images/img 1.jpg" alt="" srcset="" />
+          </div>
+        </div>
+      </div>
+      <div class="list-gallery">
+        <div class="gallery-item">
+          <img src="/assets/images/img 1.jpg" alt="" />
+        </div>
+        <div class="gallery-item">
+          <img src="/assets/images/img 2.jpg" alt="" />
+        </div>
+        <div class="gallery-item">
+          <img src="/assets/images/img 7.jpg" alt="" />
+        </div>
+        <div class="gallery-item">
+          <img src="/assets/images/img 13.jpg" alt="" />
+        </div>
+        <div class="gallery-item">
+          <img src="/assets/images/img 18.jpg" alt="" />
+        </div>
+        <div class="gallery-item">
+          <img src="/assets/images/img 19.jpg" alt="" />
+        </div>
+        <div class="gallery-item">
+          <img src="/assets/images/img 21.jpg" alt="" />
+        </div>
+        <div class="gallery-item">
+          <img src="/assets/images/img 24.jpg" alt="" />
+        </div>
+        <div class="gallery-item">
+          <img src="/assets/images/img 10.jpg" alt="" />
+        </div>
+        <div class="gallery-item">
+          <img src="/assets/images/img 22.jpg" alt="" />
+        </div>
+        <div class="gallery-item">
+          <img src="/assets/images/img 25.jpg" alt="" />
+        </div>
+        <div class="gallery-item">
+          <img src="/assets/images/img 23.jpg" alt="" />
+        </div>
+      </div>
+      <div class="dot-trigger"></div>
+    </section>
+    <section class="outro">
+      <h1>
+        As the journey comes to a close, let the images linger in your mind — a
+        timeless reminder that every detail holds a world of meaning.
+      </h1>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.3.8/dist/lenis.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
   const scrollerImages = document.querySelectorAll(".scroller-image");
-  let smoother = ScrollSmoother.create({
+  ScrollSmoother.create({
     smooth: 2,
     effects: true,
     smoothTouch: 0.1,

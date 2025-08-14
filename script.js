@@ -101,6 +101,12 @@ const list_animations = [
     preview: "/assets/images/demo/slide-animation-observer.png",
     baseColor: "baseColorSlideObserver",
   },
+  {
+    title: "Horizontal Scroll Animation Tomoya Okada",
+    href: "/gallery-horizontal-scroll/index.html",
+    preview: "/assets/images/demo/horizontal-scroll-tomoyaokada.png",
+    baseColor: "baseColorTomoyaokada",
+  },
 ];
 
 function randomNumber(min, max) {
@@ -238,10 +244,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   initLenis(lenis);
 
-  lenis.scrollTo(0);
-
-  lenis.stop();
-
   const rootStyle = getComputedStyle(document.documentElement);
   const rootVariableCss = {
     primaryColor: rootStyle.getPropertyValue("--primary-color"), // #eaeaea
@@ -261,7 +263,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     baseColorVooban: rootStyle.getPropertyValue("--base-vooban-color"), // #1458e4
     baseColorScrollText: rootStyle.getPropertyValue("--base-scroll-text-color"), // #ffffff
     baseColorCineCasero: rootStyle.getPropertyValue("--base-cine-casero-color"), // #eae9e4
-    baseColorSlideObserver: rootStyle.getPropertyValue("--base-slide-observer-color") // #1e1d1d
+    baseColorSlideObserver: rootStyle.getPropertyValue(
+      "--base-slide-observer-color"
+    ), // #1e1d1d
+    baseColorTomoyaokada: rootStyle.getPropertyValue(
+      "--base-tomoyaokada-color"
+    ), // #e4e0dd
   };
 
   const container = document.querySelector(".main-container");
@@ -597,9 +604,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   timeline.to(".animations-title", {
     opacity: 1,
-    onComplete: () => {
-      lenis.start();
-    },
   });
 
   timeline.to(".divider", {

@@ -1,0 +1,142 @@
+:root {
+  --bg-color: #e4e0dd;
+  --text-color: #d9710a;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+@font-face {
+  font-family: "Neue Montreal Light";
+  src: url("/assets/fonts/NeueMontrealLight.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+body {
+  font-family: "Neue Montreal Light";
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.site {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  font-size: clamp(1.5em, 5vw, 1em);
+}
+
+.intro,
+.outro {
+  width: 100%;
+  height: 100dvh;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  font-size: calc(40 / var(--vw) * var(--multiplier));
+  padding-bottom: 1rem;
+  position: relative;
+}
+
+.intro h1,
+.outro h1 {
+  max-width: 90vw;
+  text-indent: 5em;
+}
+
+.scrolling {
+  width: 100%;
+  height: 100dvh;
+  position: relative;
+  padding: 2rem 3rem;
+  overflow: hidden;
+}
+
+.wrapper-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-content {
+  width: 33%;
+}
+
+.title-content {
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.25rem;
+  font-size: 3vw;
+  font-weight: 800;
+}
+
+.description-content {
+  margin-top: 1rem;
+  font-weight: 500;
+  font-size: 1.25vw;
+  font-weight: 600;
+  text-indent: 4em;
+}
+
+.right-content {
+  width: 67%;
+}
+
+.wrapper-image {
+  width: 70%;
+  height: 70%;
+  margin-inline: auto;
+}
+
+.wrapper-image img {
+  object-fit: contain;
+}
+
+.list-gallery {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: nowrap;
+  position: absolute;
+  bottom: 2rem;
+  left: 0;
+  padding-left: 50vw;
+  will-change: transform;
+}
+
+.gallery-item {
+  width: 10vw;
+  aspect-ratio: 4 / 3;
+}
+
+.dot-trigger {
+  width: 8px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: var(--text-color);
+  pointer-events: none;
+  position: absolute;
+  bottom: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
