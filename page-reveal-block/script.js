@@ -3,11 +3,13 @@ const loaderPercentage = document.querySelector(".loader-percentage p");
 const overlayPreload = document.querySelector(".overlay-preload");
 const loaderSpinner = document.querySelector(".loader-spinner");
 const splitTitle = SplitText.create(".title h1", {
-  type: "chars,words",
+  type: "chars",
   charsClass: "char",
-  autoSplit: true,
 });
 const images = gsap.utils.toArray(".image-container");
+gsap.set(splitTitle.chars, {
+  yPercent: 150,
+});
 
 function playAnimation() {
   const tl = gsap.timeline({
@@ -73,8 +75,8 @@ function playAnimation() {
       "<"
     )
     .to(preloadBlocks, {
-      clipPath: "inset(0 0 100% 0)",
-      duration: 0.75,
+      opacity: 0,
+      duration: 0.5,
       stagger: {
         each: 0.015,
         from: "random",
@@ -85,7 +87,7 @@ function playAnimation() {
       },
     })
     .to(splitTitle.chars, {
-      y: 0,
+      yPercent: 0,
       duration: 0.75,
       ease: "power3.out",
       stagger: {

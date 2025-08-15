@@ -109,8 +109,24 @@ const list_animations = [
   },
 ];
 
-function randomNumber(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+function createReactiveValue(initialValue, callback) {
+  return new Proxy(
+    { value: initialValue },
+    {
+      set(target, prop, newValue) {
+        if (prop === "value") {
+          const oldValue = target[prop];
+          target[prop] = newValue;
+          if (oldValue !== newValue) {
+            callback(newValue, oldValue);
+          }
+        } else {
+          target[prop] = newValue;
+        }
+        return true;
+      },
+    }
+  );
 }
 
 async function loadFont(target, config) {
@@ -118,518 +134,392 @@ async function loadFont(target, config) {
   return SplitText.create(target, config);
 }
 
-function initLenis(lenis) {
-  lenis.on("scroll", ScrollTrigger.update);
-
-  gsap.ticker.add((time) => {
-    lenis.raf(time * 1000);
-  });
-
-  gsap.ticker.lagSmoothing(0);
-}
-
-function renderListAnimations(container, lists) {
-  lists.forEach((list, index) => {
-    const animationContent = `
-      <li class="animation not-done" data-navigation="${
-        list.href
-      }" data-preview="${list.preview}">
-        <div class="animation-content">
-          <span class="number">
-            ${index + 1 < 10 ? `0${index + 1}` : index + 1}
-          </span>
-          <div class="wrapper-title">
-            <h3 class="title">${list.title
-              .split(" ")
-              .map((word) =>
-                word
-                  .split("")
-                  .map((char) =>
-                    char.toUpperCase() === "O"
-                      ? `<span class="highlight-char">${char}</span>`
-                      : char
-                  )
-                  .join("")
-              )
-              .join(" ")}</h3>
-          </div>
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 12 12"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            class="icon"
-            data-v-840a93c7=""
-          >
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M11.9966 8.5308C11.9966 8.84819 11.7334 9.11139 11.416 9.11139C11.0986 9.11139 10.8354 8.84819 10.8354 8.5308V1.98239L0.989067 11.8287C0.872949 11.9448 0.725867 11.999 0.578784 11.999C0.431702 11.999 0.284619 11.9448 0.168502 11.8287C-0.0559931 11.6042 -0.0559931 11.2326 0.168502 11.0082L10.0155 1.16118H3.46578C3.14839 1.16118 2.88519 0.897979 2.88519 0.58059C2.88519 0.263201 3.14839 0 3.46578 0H11.416C11.5014 0 11.5828 0.0190504 11.6563 0.0530812C11.7183 0.0808598 11.7763 0.119992 11.8267 0.170477C11.8841 0.227843 11.9268 0.294813 11.9549 0.366478C11.9817 0.432929 11.9966 0.505232 11.9966 0.58059V8.5308Z"
-              fill="currentColor"
-            ></path>
-          </svg>
-        </div>
-        <div class="divider"></div>
-      </li>
-    `;
-
-    container.insertAdjacentHTML("beforeend", animationContent);
-  });
-}
-
-function showPreview(container, src, alt, isBiggerThen) {
-  const card = document.createElement("div");
-  card.className = "card-preview";
-  card.style.transform = "scale(1.25)";
-  card.style.clipPath = isBiggerThen
-    ? "inset(0% 0% 100% 0%)"
-    : "inset(100% 0 0 0)";
-  card.style.zIndex = container.childElementCount + 1;
-  const image = document.createElement("img");
-  image.src = src;
-  image.alt = alt;
-
-  card.appendChild(image);
-  container.appendChild(card);
-
-  gsap.to(card, {
-    transform: "scale(1)",
-    clipPath: "inset(0% 0% 0% 0%)",
-    duration: 0.5,
-    ease: "power1.out",
-  });
-}
-
-function removeExtraImage(container) {
-  while (container.childElementCount > 6) {
-    container.firstElementChild.remove();
-  }
-}
-
-function navigationTo(href, baseColorDestination) {
-  const timeline = gsap.timeline({
-    defaults: { duration: 1, ease: "power3.out" },
-    onComplete: () => {
-      window.location.href = href;
-    },
-  });
-  timeline
-    .to("body", {
-      opacity: 0,
-    })
-    .to(".logo", {
-      opacity: 0,
-      willChange: "opacity",
-    })
-    .to("body", {
-      backgroundColor: baseColorDestination,
-    });
-}
-
-function handelResponsiveMobileFunction(mediaQuery, callback) {
-  if (mediaQuery.mathces) return;
-  callback();
-}
-
 document.addEventListener("DOMContentLoaded", async () => {
-  gsap.registerPlugin(ScrollTrigger, SplitText, Flip, CustomBounce, CustomEase);
-  CustomBounce.create("highlightBounce", {
-    strength: 0.8,
-    squash: 3,
+  gsap.registerPlugin(
+    ScrollTrigger,
+    SplitText,
+    CustomEase,
+    CustomBounce,
+    Observer
+  );
+
+  CustomEase.create("hop", "0, 0.9, 0, 1");
+  let isDoneRenderAnimation = false,
+    isAnimating = false,
+    lastIndexImage = 0;
+
+  const viewSiteTemplate = `
+        <p>Visit Site</p>
+        <svg
+          width="8"
+          height="8"
+          viewBox="0 0 12 12"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon"
+          data-v-840a93c7=""
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M11.9966 8.5308C11.9966 8.84819 11.7334 9.11139 11.416 9.11139C11.0986 9.11139 10.8354 8.84819 10.8354 8.5308V1.98239L0.989067 11.8287C0.872949 11.9448 0.725867 11.999 0.578784 11.999C0.431702 11.999 0.284619 11.9448 0.168502 11.8287C-0.0559931 11.6042 -0.0559931 11.2326 0.168502 11.0082L10.0155 1.16118H3.46578C3.14839 1.16118 2.88519 0.897979 2.88519 0.58059C2.88519 0.263201 3.14839 0 3.46578 0H11.416C11.5014 0 11.5828 0.0190504 11.6563 0.0530812C11.7183 0.0808598 11.7763 0.119992 11.8267 0.170477C11.8841 0.227843 11.9268 0.294813 11.9549 0.366478C11.9817 0.432929 11.9966 0.505232 11.9966 0.58059V8.5308Z"
+            fill="currentColor"
+          ></path>
+        </svg>`;
+
+  const container = {
+      left: document.querySelector(".left-container"),
+      right: document.querySelector(".right-container"),
+    },
+    preload = {
+      text: document.querySelectorAll(".text-preload span"),
+      number: document.querySelector(".number-preload span"),
+      divider: document.querySelector(".divider"),
+      blocks: document.querySelectorAll(".preload-overlay .block"),
+    };
+
+  const splitDescription = await loadFont(".description p", {
+      type: "lines",
+      linesClass: "line",
+      aria: "hidden",
+      mask: "lines",
+    }),
+    splitTitleContent = await loadFont(".title-content", {
+      type: "chars",
+      aria: "hidden",
+    });
+
+  const baseCursor = document.querySelector(".base-cursor"),
+    wrapperTitleProject = container.left.querySelector(
+      ".wrapper-project .wrapper-title-project"
+    ),
+    numberProject = container.left.querySelector(
+      ".wrapper-project .number-project"
+    ),
+    images = container.right.querySelector(".images");
+
+  list_animations.forEach(async (item, index) => {
+    const titleElement = document.createElement("h1");
+    titleElement.className = "title-project";
+    titleElement.textContent = item.title;
+    wrapperTitleProject.appendChild(titleElement);
+
+    const numberElement = document.createElement("span");
+    numberElement.textContent = String(index + 1).padStart(2, "0");
+    numberProject.appendChild(numberElement);
+
+    const imageWrapper = document.createElement("a");
+    imageWrapper.href = item.href;
+    imageWrapper.target = "_blank";
+    imageWrapper.rel = "noopener noreferrer";
+    imageWrapper.className = "image-wrapper";
+    imageWrapper.style.zIndex = index === 0 ? 0 : -index;
+    const imageElement = document.createElement("img");
+    imageElement.src = item.preview;
+    imageElement.alt = item.title;
+    imageWrapper.appendChild(imageElement);
+    images.appendChild(imageWrapper);
   });
-  CustomEase.create("hoverEase", "0.65, 0.05, 0, 1");
-  CustomEase.create("easeInOutQuart", ".645, .045, .355, 1");
-  const lenis = new Lenis();
 
-  initLenis(lenis);
+  const imagesProject = gsap.utils.toArray(".image-wrapper"),
+    totalImage = imagesProject.length,
+    numbersProject = gsap.utils.toArray(".number-project span"),
+    titlesProject = gsap.utils.toArray(".title-project"),
+    footer = document.querySelector(".footer");
 
-  const rootStyle = getComputedStyle(document.documentElement);
-  const rootVariableCss = {
-    primaryColor: rootStyle.getPropertyValue("--primary-color"), // #eaeaea
-    secondaryColor: rootStyle.getPropertyValue("--secondary-color"), // #131313
-    baseColorElementis: rootStyle.getPropertyValue("--base-elementis-color"), // #2b3530
-    baseColorTextHoverDestination: rootStyle.getPropertyValue(
-      "--base-text-hover-color"
-    ), // #eaeaea
-    baseColorScrollImageGallery: rootStyle.getPropertyValue(
-      "--base-scroll-image-gallery-color"
-    ), // #f0f0f0
-    baseColorBindery: rootStyle.getPropertyValue("--base-bindery-color"), // #e7e789
-    baseColorPageRevealBlock: rootStyle.getPropertyValue(
-      "--base-page-reveal-color"
-    ), // #ff4d07
-    baseColorTelescope: rootStyle.getPropertyValue("--base-telescope-color"), // #f4f3f0
-    baseColorVooban: rootStyle.getPropertyValue("--base-vooban-color"), // #1458e4
-    baseColorScrollText: rootStyle.getPropertyValue("--base-scroll-text-color"), // #ffffff
-    baseColorCineCasero: rootStyle.getPropertyValue("--base-cine-casero-color"), // #eae9e4
-    baseColorSlideObserver: rootStyle.getPropertyValue(
-      "--base-slide-observer-color"
-    ), // #1e1d1d
-    baseColorTomoyaokada: rootStyle.getPropertyValue(
-      "--base-tomoyaokada-color"
-    ), // #e4e0dd
-  };
+  gsap.set(
+    imagesProject.filter((_, index) => index !== 0),
+    {
+      yPercent: 100,
+    }
+  );
 
-  const container = document.querySelector(".main-container");
-  const listAnimationContainer = document.querySelector(".list-animations");
-  const previewContainer = document.querySelector(".preview-animation");
-  const listWrapper = document.querySelector(".list-wrapper");
-  let lastIndexHoverListAnimation = 0;
-  const mediaQuery = window.matchMedia("(min-width: 768px)");
-  const marquee = document.querySelector(".infinite-text-wrapper");
+  gsap.set(footer, {
+    opacity: 0,
+    willChange: "opacity",
+  });
 
-  renderListAnimations(listAnimationContainer, list_animations);
+  gsap.set(container.right, {
+    clipPath: "inset(100% 0 0 0)",
+    willChange: "clip-path",
+  });
 
-  const allAnimation = document.querySelectorAll(".animation");
+  gsap.set(container.right.querySelector(".images"), {
+    scale: 1.25,
+    willChange: "transform",
+  });
 
-  allAnimation.forEach(async (element, index) => {
-    const wrapperTitle = element.querySelector(
-      ".animation-content .wrapper-title"
-    );
-    const originalTitle = wrapperTitle.querySelector(".title");
-    const cloneTitle = originalTitle.cloneNode(true);
-    wrapperTitle.appendChild(cloneTitle);
+  gsap.set(container.left.querySelector(".infinite-text-wrapper"), {
+    scale: 0,
+  });
 
-    const splitFirstTitle = await loadFont(originalTitle, {
-      type: "chars",
-      mask: "chars",
-      charsClass: "chars-title",
-      aria: "hidden",
+  gsap.set([titlesProject, numbersProject, splitDescription.lines], {
+    yPercent: 150,
+  });
+
+  gsap.set(splitTitleContent.chars, {
+    scale: 0,
+    transformOrigin: (i) => (i % 2 === 0 ? "bottom" : "top"),
+    willChange: "transform",
+  });
+
+  const donePreload = createReactiveValue(false, (newVal, _) => {
+    if (newVal) {
+      const timelineFirtsRender = gsap
+        .timeline({
+          defaults: {
+            ease: "power4.inOut",
+            duration: 1.25,
+          },
+          onComplete: () => {
+            isDoneRenderAnimation = true;
+            timelineFirtsRender.kill();
+            splitTitleContent && splitTitleContent.revert();
+            splitDescription && splitDescription.revert();
+          },
+        })
+        .to(container.right, {
+          clipPath: "inset(0% 0 0 0)",
+        })
+        .to(
+          ".images",
+          {
+            scale: 1,
+            ease: "expo.out",
+            duration: 1,
+          },
+          "-=0.75"
+        )
+        .to(
+          container.left.querySelector(".infinite-text-wrapper"),
+          {
+            scale: 1,
+          },
+          0
+        )
+        .to(
+          ".title-project:first-child, .number-project span:first-child",
+          {
+            yPercent: 0,
+          },
+          0.5
+        )
+        .to(
+          footer,
+          {
+            opacity: 1,
+          },
+          "<"
+        )
+        .to(
+          splitDescription.lines,
+          {
+            yPercent: 0,
+            stagger: 0.25,
+          },
+          0
+        )
+        .to(
+          splitTitleContent.chars,
+          {
+            scale: 1,
+            stagger: 0.15,
+            ease: CustomBounce.create("titleBounce", {
+              strength: 0.5,
+              squash: 1,
+            }),
+          },
+          0
+        );
+    }
+  });
+
+  const timelinePreloader = gsap
+    .timeline({
+      defaults: {
+        ease: "power4.inOut",
+        duration: 1.25,
+      },
+      onComplete: () => {
+        donePreload.value = true;
+        timelinePreloader.kill();
+        document.querySelector(".preload-overlay").remove();
+      },
+    })
+    .to(preload.number, {
+      textContent: 100,
+      snap: {
+        textContent: [
+          0, 5, 7, 12, 18, 21, 28, 35, 39, 40, 47, 55, 62, 65, 78, 83, 89, 91,
+          95, 99, 100,
+        ],
+      },
+      duration: 5,
+      delay: 0.5,
+    })
+    .to(preload.number, {
+      scale: 0,
+    })
+    .to(preload.text, {
+      y: 0,
+      stagger: 0.2,
+    })
+    .to(preload.divider, {
+      scaleY: 1,
+      duration: 1,
+    })
+    .to(preload.divider, {
+      opacity: 0,
+    })
+    .to(preload.text, {
+      yPercent: -150,
+      stagger: 0.2,
+    })
+    .to(preload.blocks, {
+      clipPath: "inset(0 0 100% 0)",
+      stagger: 0.075,
     });
 
-    const splitSecondTitle = await loadFont(cloneTitle, {
-      type: "chars",
-      mask: "chars",
-      charsClass: "chars-title",
-      aria: "hidden",
+  document.addEventListener("mousemove", (e) => {
+    gsap.to(baseCursor, {
+      x: e.clientX - baseCursor.offsetWidth / 2,
+      y: e.clientY + baseCursor.offsetHeight / 2,
+      duration: 0.5,
+      ease: "power2.out",
     });
+  });
+
+  container.right
+    .querySelector(".images")
+    .addEventListener("mouseenter", () => {
+      if (!donePreload) return;
+      const viewSite = baseCursor.querySelector(".view-site");
+      if (viewSite) return;
+      const viewSiteEl = document.createElement("div");
+      viewSiteEl.className = "view-site";
+      viewSiteEl.innerHTML = viewSiteTemplate;
+      baseCursor.appendChild(viewSiteEl);
+
+      gsap.fromTo(
+        viewSiteEl,
+        {
+          clipPath: "inset(0 100% 0 0)",
+        },
+        {
+          clipPath: "inset(0 0% 0 0)",
+          duration: 0.5,
+          willChange: "clip-path",
+          ease: "power4.inOut",
+        }
+      );
+    });
+
+  container.right
+    .querySelector(".images")
+    .addEventListener("mouseleave", () => {
+      if (!donePreload) return;
+      const viewSiteEl = baseCursor.querySelector(".view-site");
+      if (viewSiteEl) {
+        gsap.to(viewSiteEl, {
+          clipPath: "inset(0 100% 0 0)",
+          duration: 0.5,
+          willChange: "clip-path",
+          ease: "power4.inOut",
+          onComplete: () => {
+            viewSiteEl.remove();
+          },
+        });
+      }
+    });
+
+  function goToSection(index, direction) {
+    isAnimating = true;
+
+    const isGoDown = direction === 1,
+      dFactor = isGoDown ? 1 : -1;
 
     const timeline = gsap.timeline({
-      paused: true,
-      defaults: {
-        ease: "hoverEase",
-        duration: 0.15,
-        stagger: {
-          from: "random",
-          each: 0.05,
-        },
+      onComplete: () => {
+        lastIndexImage = index;
+        isAnimating = false;
       },
+      defaults: {
+        duration: 1.25,
+        ease: "power4.inOut",
+      },
+    });
+
+    const currentImg = imagesProject[index].querySelector("img");
+
+    gsap.set(imagesProject[index], {
+      yPercent: dFactor * 100,
+    });
+
+    gsap.set(currentImg, {
+      scale: 1.25,
+      willChange: "transform",
+    });
+
+    gsap.set([numbersProject[index], titlesProject[index]], {
+      yPercent: dFactor * 150,
     });
 
     timeline
-      .to(splitFirstTitle.chars, {
-        y: "-150%",
+      .to(imagesProject[lastIndexImage], {
+        yPercent: -100 * dFactor,
       })
-      .to(splitSecondTitle.chars, {
-        y: 0,
-      });
-
-    element.addEventListener("mouseenter", (e) => {
-      if (element.classList.contains("not-done")) return;
-      timeline.play();
-
-      handelResponsiveMobileFunction(mediaQuery, () => {
-        showPreview(
-          previewContainer,
-          element.dataset.preview,
-          originalTitle.textContent,
-          index + 1 > lastIndexHoverListAnimation
-        );
-
-        removeExtraImage(previewContainer);
-
-        lastIndexHoverListAnimation = index + 1;
-
-        const rect = element.getBoundingClientRect();
-        const fromTop = e.clientY < rect.top + rect.height / 2;
-        element.classList.remove("top", "bottom");
-        element.classList.add(fromTop ? "bottom" : "top");
-      });
-    });
-
-    element.addEventListener("mouseleave", (e) => {
-      if (element.classList.contains("not-done")) return;
-      timeline.reverse();
-      handelResponsiveMobileFunction(mediaQuery, () => {
-        const rect = element.getBoundingClientRect();
-        const toTop = e.clientY < rect.top + rect.height / 2;
-
-        element.classList.remove("top", "bottom");
-        element.classList.add(toTop ? "bottom" : "top");
-      });
-    });
-
-    element.addEventListener("click", function () {
-      if (element.classList.contains("not-done")) return;
-      const destination = this.dataset.navigation;
-      const baseColor =
-        rootVariableCss[
-          list_animations.find((anim) => anim.href === destination).baseColor
-        ];
-      navigationTo(destination, baseColor);
-    });
-  });
-
-  handelResponsiveMobileFunction(mediaQuery, () => {
-    listWrapper.addEventListener("pointerleave", () => {
-      const lastPreview = previewContainer.querySelector(
-        ".card-preview:last-child"
-      );
-
-      if (!lastPreview) return;
-
-      gsap.to(previewContainer.querySelectorAll(".card-preview"), {
-        clipPath: "inset(100% 0 0 0)",
+      .to(
+        imagesProject[index],
+        {
+          yPercent: 0,
+        },
+        0
+      )
+      .to(
+        titlesProject[lastIndexImage],
+        {
+          yPercent: -150 * dFactor,
+        },
+        0
+      )
+      .to(
+        titlesProject[index],
+        {
+          yPercent: 0,
+        },
+        0
+      )
+      .to(
+        numbersProject[lastIndexImage],
+        {
+          yPercent: -150 * dFactor,
+        },
+        0
+      )
+      .to(
+        numbersProject[index],
+        {
+          yPercent: 0,
+        },
+        0
+      )
+      .to(currentImg, {
+        scale: 1,
+        ease: "hop",
         duration: 1,
-        ease: "power2.out",
       });
-    });
+  }
+
+  Observer.create({
+    type: "wheel,touch",
+    wheelSpeed: -1,
+    onUp: () =>
+      isDoneRenderAnimation &&
+      !isAnimating &&
+      goToSection((lastIndexImage + 1) % totalImage, 1),
+    onDown: () =>
+      isDoneRenderAnimation &&
+      !isAnimating &&
+      goToSection((lastIndexImage - 1 + totalImage) % totalImage, -1),
   });
-
-  // document.addEventListener("mousemove", (e) => {
-  //   gsap.to(".base-cursor", {
-  //     x: e.clientX,
-  //     y: e.clientY,
-  //     duration: 0.5,
-  //     ease: "power2.out",
-  //   });
-  // });
-
-  const splitPreloadLogo = await loadFont(".preload-logo", {
-    type: "chars",
-    charsClass: "chars-logo",
-  });
-
-  const splitFirstDesc = await loadFont(".desc:nth-child(1)", {
-    type: "lines",
-    mask: "lines",
-    linesClass: "lines",
-    aria: "hidden",
-  });
-
-  const splitSecondDesc = await loadFont(".desc:nth-child(2)", {
-    type: "lines",
-    mask: "lines",
-    linesClass: "lines",
-    aria: "hidden",
-  });
-
-  const splitThirdDesc = await loadFont(".desc:nth-child(3)", {
-    type: "lines",
-    mask: "lines",
-    linesClass: "lines",
-    aria: "hidden",
-  });
-
-  const timeline = gsap.timeline({
-    defaults: {
-      duration: 1,
-      ease: "power2.out",
-    },
-    onComplete: () => {
-      timeline.kill();
-    },
-  });
-
-  timeline.to(splitPreloadLogo.chars, {
-    delay: 1.5,
-    clipPath: "inset(0% 0% 0% 0%)",
-    ease: "power3.inOut",
-    stagger: {
-      each: 0.1,
-    },
-    onStart: () => {
-      gsap.to(".preload-logo", {
-        opacity: 1,
-        duration: 0.1,
-      });
-    },
-  });
-
-  timeline.to(splitPreloadLogo.chars, {
-    y: 0,
-    x: 0,
-    rotateX: 0,
-    ease: "power4.out",
-    stagger: {
-      each: 0.1,
-    },
-  });
-
-  timeline.to(".loader-spinner", {
-    opacity: 0,
-    ease: "power2.out",
-  });
-
-  timeline.to(".preloader", {
-    backgroundColor: rootVariableCss.primaryColor,
-    color: rootVariableCss.secondaryColor,
-    ease: "power2.out",
-    onComplete: () => {
-      const state = Flip.getState(".logo, .preload-logo");
-
-      document.querySelector(".logo").classList.add("active");
-      document.querySelector(".preload-logo").classList.add("active");
-
-      Flip.from(state, {
-        duration: 3,
-        absolute: true,
-        ease: "expo.inOut",
-        scale: true,
-      });
-
-      document.querySelector(".preloader").remove();
-    },
-  });
-
-  timeline.to(
-    ".highlight",
-    {
-      "--text-fill": rootVariableCss.primaryColor,
-      "--text-stroke-color": rootVariableCss.secondaryColor,
-      "--stroke-size": !mediaQuery.matches ? "1px" : "2px",
-    },
-    "+=3"
-  );
-
-  timeline.to(".highlight", {
-    transform: "skewX(-20deg)",
-    duration: 2,
-    ease: "highlightBounce",
-    onComplete: () => {
-      gsap.to(listWrapper, {
-        pointerEvents: "auto",
-        ease: "power3.out",
-        duration: 0.5,
-      });
-      gsap.to(container, {
-        pointerEvents: "auto",
-        ease: "power3.out",
-        duration: 0.5,
-      });
-      gsap.to(".rotate-char-l-logo", {
-        rotateX: 540,
-        repeat: -1,
-        duration: 2,
-        repeatDelay: 1.5,
-        yoyo: true,
-        ease: "easeInOutQuart",
-      });
-      gsap.to(marquee, {
-        y: 0,
-        duration: 1,
-        ease: "power3.inOut",
-      });
-    },
-  });
-
-  timeline.to(".about-title", {
-    opacity: 1,
-  });
-
-  timeline.to(splitFirstDesc.lines, {
-    y: 0,
-    ease: "expo.out",
-    stagger: 0.15,
-  });
-
-  timeline.to(
-    splitSecondDesc.lines,
-    {
-      y: 0,
-      ease: "expo.out",
-      stagger: 0.15,
-    },
-    "<"
-  );
-
-  timeline.to(
-    splitThirdDesc.lines,
-    {
-      y: 0,
-      ease: "expo.out",
-      stagger: 0.15,
-    },
-    "<"
-  );
-
-  handelResponsiveMobileFunction(mediaQuery, () => {
-    timeline.to(".keep-scroll", {
-      opacity: 1,
-      onComplete: () => {
-        const timelineKeepScroll = gsap.timeline({
-          defaults: {
-            repeat: -1,
-            ease: "power4.inOut",
-            duration: 1,
-            repeatDelay: 2.5,
-          },
-        });
-
-        timelineKeepScroll.to(".scrollbar-animation", {
-          scaleY: 1,
-          transformOrigin: "top",
-        });
-
-        timelineKeepScroll.to(
-          [".scrollbar-animation-left", ".scrollbar-animation-right"],
-          {
-            scaleY: 1,
-            transformOrigin: "bottom",
-          },
-          "<+.25"
-        );
-
-        timelineKeepScroll.to(
-          ".scrollbar-animation",
-          {
-            scaleY: 0,
-            transformOrigin: "bottom",
-          },
-          "+=0.25"
-        );
-
-        timelineKeepScroll.to(
-          [".scrollbar-animation-left", ".scrollbar-animation-right"],
-          {
-            scaleY: 0,
-            transformOrigin: "top",
-          },
-          "<+.25"
-        );
-      },
-    });
-  });
-
-  timeline.to(".animations-title", {
-    opacity: 1,
-  });
-
-  timeline.to(".divider", {
-    transform: "scaleX(1)",
-    duration: 0.75,
-    ease: "power3.out",
-    stagger: {
-      each: 0.25,
-    },
-  });
-
-  timeline.to(
-    ".animation-content",
-    {
-      opacity: 1,
-      duration: 1,
-      ease: "expo.in",
-      stagger: {
-        each: 0.1,
-      },
-      onComplete: () => {
-        document.querySelectorAll(".animation").forEach((el) => {
-          el.classList.remove("not-done");
-        });
-      },
-    },
-    "-=1"
-  );
 });
