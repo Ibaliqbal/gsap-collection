@@ -144,6 +144,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   );
 
   CustomEase.create("hop", "0, 0.9, 0, 1");
+
   let isDoneRenderAnimation = false,
     isAnimating = false,
     lastIndexImage = 0;
@@ -194,9 +195,18 @@ document.addEventListener("DOMContentLoaded", async () => {
       ".wrapper-project .wrapper-title-project"
     ),
     numberProject = container.left.querySelector(
-      ".wrapper-project .number-project"
+      ".wrapper-project .number-project-wrapper .number-project"
     ),
-    images = container.right.querySelector(".images");
+    totalProject = container.left.querySelector(
+      ".wrapper-project .number-project-wrapper .total-project"
+    ),
+    slashNumberProject = container.left.querySelector(
+      ".wrapper-project .number-project-wrapper .slash-number"
+    ),
+    images = container.right.querySelector(".images"),
+    footer = document.querySelector(".footer");
+
+  totalProject.textContent = String(list_animations.length).padStart(2, "0");
 
   list_animations.forEach(async (item, index) => {
     const titleElement = document.createElement("h1");
@@ -224,8 +234,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const imagesProject = gsap.utils.toArray(".image-wrapper"),
     totalImage = imagesProject.length,
     numbersProject = gsap.utils.toArray(".number-project span"),
-    titlesProject = gsap.utils.toArray(".title-project"),
-    footer = document.querySelector(".footer");
+    titlesProject = gsap.utils.toArray(".title-project");
 
   gsap.set(
     imagesProject.filter((_, index) => index !== 0),
@@ -234,7 +243,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   );
 
-  gsap.set(footer, {
+  gsap.set([footer, slashNumberProject], {
     opacity: 0,
     willChange: "opacity",
   });
@@ -253,9 +262,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     scale: 0,
   });
 
-  gsap.set([titlesProject, numbersProject, splitDescription.lines], {
-    yPercent: 150,
-  });
+  gsap.set(
+    [titlesProject, numbersProject, splitDescription.lines, totalProject],
+    {
+      yPercent: 150,
+    }
+  );
 
   gsap.set(splitTitleContent.chars, {
     scale: 0,
@@ -298,14 +310,17 @@ document.addEventListener("DOMContentLoaded", async () => {
           0
         )
         .to(
-          ".title-project:first-child, .number-project span:first-child",
+          [
+            ".title-project:first-child, .number-project span:first-child",
+            totalProject,
+          ],
           {
             yPercent: 0,
           },
           0.5
         )
         .to(
-          footer,
+          [footer, slashNumberProject],
           {
             opacity: 1,
           },
@@ -315,7 +330,10 @@ document.addEventListener("DOMContentLoaded", async () => {
           splitDescription.lines,
           {
             yPercent: 0,
-            stagger: 0.25,
+            stagger: {
+              each: 0.25,
+              from: "random",
+            },
           },
           0
         )
@@ -392,7 +410,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   container.right
     .querySelector(".images")
     .addEventListener("mouseenter", () => {
-      if (!donePreload) return;
       const viewSite = baseCursor.querySelector(".view-site");
       if (viewSite) return;
       const viewSiteEl = document.createElement("div");

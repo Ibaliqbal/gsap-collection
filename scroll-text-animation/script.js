@@ -2,11 +2,6 @@ async function loadFont(target, config) {
   await document.fonts.ready;
   return SplitText.create(target, config);
 }
-
-function randomNumber(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
 document.addEventListener("DOMContentLoaded", async () => {
   gsap.registerPlugin(ScrollTrigger, SplitText);
   const mediaQuery = window.matchMedia("(max-width: 768px)");
@@ -27,11 +22,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     charsClass: "char-text",
   });
 
-  console.log(end);
-
   textSplit.chars.forEach((char) => {
     gsap.set(char, {
-      rotate: randomNumber(-30, 30),
+      rotate: "random(-30, 30)",
       rotateX: "180deg",
     });
   });
