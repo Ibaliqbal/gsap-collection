@@ -343,6 +343,11 @@ body {
     flex-direction: column-reverse;
   }
 
+  .right-container {
+    width: 100%;
+    height: 50dvh;
+  }
+
   .left-container {
     width: 100%;
     height: 50dvh;
@@ -374,11 +379,6 @@ body {
     font-size: calc(18 / var(--vw) * var(--multiplier));
   }
 
-  .right-container {
-    width: 100%;
-    height: 50dvh;
-  }
-
   .number-preload {
     font-size: calc(24 / var(--vw) * var(--multiplier));
   }
@@ -393,6 +393,14 @@ body {
 }
 
 @media (max-width: 768px) {
+  .right-container {
+    height: 40dvh;
+  }
+
+  .left-container {
+    height: 60dvh;
+  }
+
   .infinite-text-inner {
     font-size: calc(30 / var(--vw) * var(--multiplier));
   }
