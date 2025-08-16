@@ -122,6 +122,7 @@ body {
   gap: 0.5rem;
   animation: marquee 30s linear infinite;
   font-size: calc(12 / var(--vw) * var(--multiplier));
+  user-select: none;
 }
 
 .infinite-text-wrapper:hover .infinite-text-inner {
