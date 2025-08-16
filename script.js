@@ -6,12 +6,6 @@ const list_animations = [
     baseColor: "baseColorPageRevealBlock",
   },
   {
-    title: "Text Hover Animation",
-    href: "/text-hover-animation/index.html",
-    preview: "/assets/images/demo/text-hover.png",
-    baseColor: "baseColorTextHoverDestination",
-  },
-  {
     title: "Scroll Image Gallery",
     href: "/scroll-image-gallery/index.html",
     preview: "/assets/images/demo/scroll-image-gallery.png",

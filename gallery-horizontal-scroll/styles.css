@@ -127,6 +127,7 @@ body {
 .gallery-item {
   width: 10vw;
   aspect-ratio: 4 / 3;
+  filter: grayscale(1);
 }
 
 .dot-trigger {

@@ -185,7 +185,7 @@ body {
 }
 
 .description p {
-  font-size: calc(14 / var(--vw) * var(--multiplier));
+  font-size: calc(15 / var(--vw) * var(--multiplier));
 }
 
 .wrapper-project {
@@ -290,14 +290,16 @@ body {
   overflow: hidden;
   will-change: transform;
   padding: 0 0.5rem;
+  user-select: none;
+  pointer-events: none;
 }
 
 .block.left .text-preload {
-  right: 0.25rem;
+  right: 0;
 }
 
 .block.right .text-preload {
-  left: 0.25rem;
+  left: 0;
   font-style: italic;
   font-family: "PP Editorial";
 }
@@ -310,7 +312,7 @@ body {
 
 .divider {
   position: absolute;
-  width: 1px;
+  width: 0.5px;
   height: 100%;
   background-color: var(--primary-color);
   top: 0;
@@ -330,6 +332,8 @@ body {
   display: inline-block;
   font-size: calc(18 / var(--vw) * var(--multiplier));
   font-weight: 500;
+  user-select: none;
+  pointer-events: none;
 }
 
 .number-preload span {
@@ -338,7 +342,7 @@ body {
 
 @media (max-width: 1024px) {
   .infinite-text-inner {
-    font-size: calc(20 / var(--vw) * var(--multiplier));
+    font-size: calc(25 / var(--vw) * var(--multiplier));
   }
 
   .main-container {
@@ -365,11 +369,11 @@ body {
   }
 
   .description p {
-    font-size: calc(24 / var(--vw) * var(--multiplier));
+    font-size: calc(30 / var(--vw) * var(--multiplier));
   }
 
   .wrapper-title-project {
-    --font-size-title-project: calc(45 / var(--vw) * var(--multiplier));
+    --font-size-title-project: calc(47 / var(--vw) * var(--multiplier));
     height: calc(var(--font-size-title-project) + 10px);
   }
 
@@ -378,12 +382,11 @@ body {
   }
 
   .number-project-wrapper * {
-    font-size: calc(28 / var(--vw) * var(--multiplier));
+    font-size: calc(30 / var(--vw) * var(--multiplier));
   }
 
   .footer {
-    display: flex;
-    font-size: calc(18 / var(--vw) * var(--multiplier));
+    font-size: calc(30 / var(--vw) * var(--multiplier));
   }
 
   .number-preload {
@@ -401,7 +404,7 @@ body {
 
 @media (max-width: 768px) {
   .infinite-text-inner {
-    font-size: calc(30 / var(--vw) * var(--multiplier));
+    font-size: calc(32 / var(--vw) * var(--multiplier));
   }
 
   .wrapper-content {
@@ -409,11 +412,11 @@ body {
   }
 
   .description p {
-    font-size: calc(34 / var(--vw) * var(--multiplier));
+    font-size: calc(34.5 / var(--vw) * var(--multiplier));
   }
 
   .footer {
-    font-size: calc(30 / var(--vw) * var(--multiplier));
+    font-size: calc(33 / var(--vw) * var(--multiplier));
   }
 
   .wrapper-title-project {
