@@ -43,6 +43,7 @@ body {
 
 .container.active {
   background-color: black;
+  cursor: grabbing;
 }
 
 .container.active .card-img {

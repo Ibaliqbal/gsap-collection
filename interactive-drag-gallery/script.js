@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  gsap.registerPlugin(Observer, InertiaPlugin);
+  gsap.registerPlugin(Observer);
   const gallery = document.querySelector(".wrapper");
   const container = document.querySelector(".container");
 
@@ -39,11 +39,9 @@ document.addEventListener("DOMContentLoaded", () => {
       xQuick(xTrack);
     },
     onPress: () => {
-      container.style.cursor = "grabbing";
       container.classList.add("active");
     },
     onRelease: () => {
-      container.style.cursor = "grab";
       container.classList.remove("active");
     },
     tolerance: 10,
