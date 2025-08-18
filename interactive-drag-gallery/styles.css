@@ -41,12 +41,12 @@ body {
   transition: background-color 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-.container.active {
+.container.dragging {
   background-color: black;
   cursor: grabbing;
 }
 
-.container.active .card-img {
+.container.dragging .card-img {
   transform: scale(0.85);
 }
 
@@ -72,7 +72,7 @@ body {
   margin-top: 10rem;
 }
 
-.container:not(.active) .card-img:hover {
+.container:not(.dragging) .card-img:hover {
   transform: scale(1.05);
 }
 
@@ -87,7 +87,7 @@ body {
   object-fit: contain;
 }
 
-.container.active .text-wrapper {
+.container.dragging .text-wrapper {
   color: white;
 }
 

@@ -68,13 +68,31 @@ body {
 }
 
 .view-site {
+  --font-size: calc(12 / var(--vw) * var(--multiplier));
+  position: absolute;
   background-color: var(--secondary-color);
   color: var(--primary-color);
-  font-size: calc(12 / var(--vw) * var(--multiplier));
-  padding: 0.35rem 1rem;
+  width: calc(var(--font-size) * 10);
+  height: calc(var(--font-size) * 2);
+  pointer-events: none;
+  user-select: none;
+}
+
+.inner-view-site {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  height: 100%;
+  width: max-content;
+  animation: marquee 10s linear infinite;
+}
+
+.wrapper-text-view-site {
+  font-size: var(--font-size);
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  padding: 0 0.5rem;
 }
 
 .line {

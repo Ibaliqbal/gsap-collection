@@ -129,7 +129,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   let isDoneRenderAnimation = false,
     isAnimating = false,
-    lastIndexImage = 0;
+    lastIndexImage = 0,
+    widthViewSiteEl = 0,
+    heightViewSiteEl = 0;
 
   const viewSiteTemplate = `
         <p>Visit Site</p>
@@ -381,9 +383,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
   document.addEventListener("mousemove", (e) => {
+    const isHoverImages =
+      e.toElement.parentElement.parentElement.classList.contains("images");
     gsap.to(baseCursor, {
-      x: e.clientX - baseCursor.offsetWidth / 2,
-      y: e.clientY + baseCursor.offsetHeight / 2,
+      x: !isHoverImages ? e.clientX : e.clientX - widthViewSiteEl / 2,
+      y: !isHoverImages ? e.clientY : e.clientY - heightViewSiteEl,
       duration: 0.5,
       ease: "power2.out",
     });
@@ -396,8 +400,21 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (viewSite) return;
       const viewSiteEl = document.createElement("div");
       viewSiteEl.className = "view-site";
-      viewSiteEl.innerHTML = viewSiteTemplate;
+      const innerViewSiteEl = document.createElement("div");
+      innerViewSiteEl.className = "inner-view-site";
+
+      for (let i = 1; i <= 10; i++) {
+        const wrapperText = document.createElement("div");
+        if (i > 2) wrapperText.ariaHidden = true;
+        wrapperText.className = "wrapper-text-view-site";
+        wrapperText.innerHTML = viewSiteTemplate;
+        innerViewSiteEl.appendChild(wrapperText);
+      }
+
+      viewSiteEl.appendChild(innerViewSiteEl);
       baseCursor.appendChild(viewSiteEl);
+      widthViewSiteEl = viewSiteEl.offsetWidth;
+      heightViewSiteEl = viewSiteEl.offsetHeight;
 
       gsap.fromTo(
         viewSiteEl,

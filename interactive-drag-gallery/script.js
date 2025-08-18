@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const gallery = document.querySelector(".wrapper");
   const container = document.querySelector(".container");
 
-  const startX = (window.innerWidth - gallery.offsetWidth) / 2,
+  let startX = (window.innerWidth - gallery.offsetWidth) / 2,
     startY = (window.innerHeight - gallery.offsetHeight) / 2;
 
   gsap.set(gallery, {
@@ -29,8 +29,8 @@ document.addEventListener("DOMContentLoaded", () => {
   Observer.create({
     type: "pointer,touch",
     onChange: (self) => {
-      xTrack += self.deltaX * 2.5;
-      yTrack += self.deltaY * 2.5;
+      xTrack += self.deltaX * 1.5;
+      yTrack += self.deltaY * 1.5;
 
       xTrack = gsap.utils.clamp(maxX, 0, xTrack);
       yTrack = gsap.utils.clamp(maxY, 0, yTrack);
@@ -39,11 +39,21 @@ document.addEventListener("DOMContentLoaded", () => {
       xQuick(xTrack);
     },
     onPress: () => {
-      container.classList.add("active");
+      container.classList.add("dragging");
     },
     onRelease: () => {
-      container.classList.remove("active");
+      container.classList.remove("dragging");
     },
     tolerance: 10,
+  });
+
+  document.addEventListener("resize", () => {
+    startX = (window.innerWidth - gallery.offsetWidth) / 2;
+    startY = (window.innerHeight - gallery.offsetHeight) / 2;
+
+    gsap.set(gallery, {
+      x: startX,
+      y: startY,
+    });
   });
 });
