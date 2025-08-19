@@ -4,11 +4,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const container = document.querySelector(".container");
 
   let startX = (window.innerWidth - gallery.offsetWidth) / 2,
-    startY = (window.innerHeight - gallery.offsetHeight) / 2;
+    startY = (window.innerHeight - gallery.offsetHeight) / 2,
+    isDoneCentredAnimation = false;
 
-  gsap.set(gallery, {
+  gsap.to(gallery, {
     x: startX,
     y: startY,
+    duration: 4,
+    ease: "power4.inOut",
+    onComplete: () => {
+      isDoneCentredAnimation = true;
+    },
   });
 
   const yQuick = gsap.quickTo(gallery, "y", {
@@ -29,14 +35,18 @@ document.addEventListener("DOMContentLoaded", () => {
   Observer.create({
     type: "pointer,touch",
     onChange: (self) => {
-      xTrack += self.deltaX * 1.5;
-      yTrack += self.deltaY * 1.5;
+      function runAnimation() {
+        xTrack += self.deltaX * 1.5;
+        yTrack += self.deltaY * 1.5;
 
-      xTrack = gsap.utils.clamp(maxX, 0, xTrack);
-      yTrack = gsap.utils.clamp(maxY, 0, yTrack);
+        xTrack = gsap.utils.clamp(maxX, 0, xTrack);
+        yTrack = gsap.utils.clamp(maxY, 0, yTrack);
 
-      yQuick(yTrack);
-      xQuick(xTrack);
+        yQuick(yTrack);
+        xQuick(xTrack);
+      }
+
+      isDoneCentredAnimation && runAnimation();
     },
     onPress: () => {
       container.classList.add("dragging");

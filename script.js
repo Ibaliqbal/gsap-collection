@@ -89,6 +89,11 @@ const list_animations = [
     href: "/interactive-drag-gallery/index.html",
     preview: "/assets/images/demo/interactive-drag-gallery.png",
   },
+  {
+    title: "Morphing Gallery",
+    href: "/morphing-gallery/index.html",
+    preview: "/assets/images/demo/morphing-gallery.png",
+  },
 ];
 
 function createReactiveValue(initialValue, callback) {
@@ -255,7 +260,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   gsap.set(splitTitleContent.chars, {
     scale: 0,
-    transformOrigin: (i) => (i % 2 === 0 ? "bottom" : "top"),
+    transformOrigin: "top 0%",
     willChange: "transform",
   });
 
@@ -325,7 +330,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           splitTitleContent.chars,
           {
             scale: 1,
-            stagger: 0.15,
+            stagger: 0.05,
             ease: CustomBounce.create("titleBounce", {
               strength: 0.5,
               squash: 1,

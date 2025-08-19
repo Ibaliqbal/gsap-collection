@@ -1,0 +1,98 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+@font-face {
+  font-family: "Neue Montreal";
+  src: url("/assets/fonts/NeueMontrealMedium.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: "Neue Montreal";
+}
+
+.intro,
+.outro {
+  width: 100%;
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.scrolling {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10em;
+  padding: 0 1.25em;
+}
+
+.wrapper-about {
+  display: flex;
+  gap: 2rem;
+}
+
+.left,
+.center,
+.right {
+  flex: 1;
+}
+
+.left,
+.right {
+  aspect-ratio: 16 / 9;
+  margin-top: 5em;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.center video {
+  position: relative;
+}
+
+.center h1 {
+  font-size: 2em;
+}
+
+.center p {
+  font-size: 1.25em;
+}
+
+.center video {
+  aspect-ratio: 16 / 9;
+}
+
+.container-fullscreen {
+  width: 100%;
+  height: 100dvh;
+}
+
+.fullscreen {
+  width: 100%;
+  height: 100%;
+}
